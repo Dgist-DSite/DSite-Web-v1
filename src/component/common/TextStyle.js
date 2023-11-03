@@ -13,7 +13,6 @@ export const Body = styled.span`
   font-size: 18px;
 `
 
-
 export const Label = styled.span`
   font-size: 14px;
 `

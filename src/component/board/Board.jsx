@@ -4,7 +4,7 @@ import {
   BoardImage,
   BoardInfoContainer,
   BoardThumbnale,
-  BoardUserContainer
+  BoardUserContainer, BodyContainer, TitleContainer
 } from "./BoardStyle";
 import React from "react";
 import {Body, Label, Title} from "../common/TextStyle";
@@ -16,8 +16,12 @@ export default function Board({ model }) {
             <BoardImage src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRda07wG6u9LV0GR46yH2Y2PZjIA6wP_BWzArLzCWv1VVWe_TT_m01EXPBBW8osOu5fgk4&usqp=CAU"}/>
             <BoardInfoContainer>
               <Label>{model.category}</Label>
-              <Title>{model.user}</Title>
-              <Body>{model.createdAt}</Body>
+              <TitleContainer>
+                <Title>{model.user}</Title>
+              </TitleContainer>
+              <BodyContainer>
+                <Body>{model.createdAt}</Body>
+              </BodyContainer>
             </BoardInfoContainer>
           </BoardUserContainer>
           <BoardContentContainer>

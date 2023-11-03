@@ -1,28 +1,37 @@
 import {useEffect, useState} from "react";
 import Board from "./component/board/Board";
-import {AppContainer, MainContainer, TitleContainer} from "./AppStyle";
-import {LargeTitle} from "./component/common/TextStyle";
+import {
+  AppContainer,
+  ButtonContainer,
+  LeftNav,
+  MainContainer,
+  NavContainer,
+  RightNav,
+  TitleContainer
+} from "./AppStyle";
+import {Body, LargeTitle, Title} from "./component/common/TextStyle";
 import axios from "axios";
 import {dgsiteAxios} from "./service/Service";
+import {DefaultButton} from "./component/common/ButtonStyle";
 
 function App() {
   const [list, setList] = useState([{
     content: "title",
-    category: "A",
+    category: "Android",
     url: "",
     user: "병춘",
-    createdAt: "2시간"
+    createdAt: "2시간 전"
   },{
     content: "title",
-    category: "A",
+    category: "Android",
     user: "병춘",
-    createdAt: "2시간"
+    createdAt: "2시간 전"
   },{
     content: "title",
-    category: "A",
+    category: "Android",
     user: "병춘",
-    createdAt: "2시간"
-  },])
+    createdAt: "2시간 전"
+  }])
 
   useEffect(() => {
     //  dgsiteAxios({
@@ -33,10 +42,21 @@ function App() {
 
   return (
     <AppContainer>
+      <NavContainer>
+        <LeftNav>
+          <TitleContainer>
+            <Title>DSite</Title>
+          </TitleContainer>
+        </LeftNav>
+        <RightNav>
+          <ButtonContainer>
+            <DefaultButton>
+              <Body>글쓰기</Body>
+            </DefaultButton>
+          </ButtonContainer>
+        </RightNav>
+      </NavContainer>
       <MainContainer>
-        <TitleContainer>
-          <LargeTitle>dgsite</LargeTitle>
-        </TitleContainer>
         <li>
           {list.map((i) =>
             <ul>

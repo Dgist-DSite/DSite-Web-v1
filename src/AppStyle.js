@@ -7,6 +7,7 @@ export const AppContainer = styled.div`
 export const MainContainer = styled.div`
   width: 40rem;
   text-align: center;
+  padding-top: 4rem;
   margin: 0 auto;
   list-style: none;
 
@@ -17,7 +18,31 @@ export const MainContainer = styled.div`
   }
 `
 
+export const NavContainer = styled.div`
+  height: 4rem;
+  width: 100vw;
+  background: white;
+  position: fixed;
+  z-index: 1;
+  border: 1px solid #D0D7DE;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 export const TitleContainer = styled.div`
-  text-align: left;
-  padding: 20px;
+  margin-left: 30px;
+  cursor: pointer;
+`
+
+export const LeftNav = styled.div`
+    
+`
+
+export const RightNav = styled.div`
+
+`
+
+export const ButtonContainer = styled.div`
+  margin-right: 30px;
 `

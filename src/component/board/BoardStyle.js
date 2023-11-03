@@ -3,11 +3,11 @@ import {styled} from 'styled-components';
 export const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
   background: #fff;
   border-radius: 10px;
   border: 1.5px solid #D0D7DE;
   margin: 0.5rem;
+  cursor: pointer;
 `;
 
 export const BoardImage = styled.img`
@@ -29,6 +29,7 @@ export const BoardInfoContainer = styled.div`
 export const BoardUserContainer = styled.div`
   display: flex;
   flex-direction: row;
+  margin: 16px 0 4px 16px;
 `
 
 export const BoardContentContainer = styled.div`
@@ -39,7 +40,7 @@ export const BoardContentContainer = styled.div`
   align-content: flex-start;
   flex-wrap: wrap;
   background: #f1f1f1;
-  margin: 10px;
+  margin: 12px;
 `
 
 export const BoardThumbnale = styled.img`
@@ -59,4 +60,12 @@ export const BoardDetail = styled.div`
   background: #f1f1f1;
   bottom: 0;
   border-radius: 0 0 10px 10px;
+`
+
+export const TitleContainer = styled.div`
+  margin-top: 4px;
+`
+
+export const BodyContainer = styled.div`
+  color: #656D76;
 `
