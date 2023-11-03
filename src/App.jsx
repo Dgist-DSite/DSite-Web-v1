@@ -5,7 +5,7 @@ import {
   ButtonContainer,
   LeftNav,
   MainContainer,
-  NavContainer,
+  NavContainer, RailContainer,
   RightNav,
   TitleContainer
 } from "./AppStyle";
@@ -51,11 +51,14 @@ function App() {
         <RightNav>
           <ButtonContainer>
             <DefaultButton>
-              <Body>글쓰기</Body>
+              <Body>블로그 공유</Body>
             </DefaultButton>
           </ButtonContainer>
         </RightNav>
       </NavContainer>
+      <RailContainer>
+
+      </RailContainer>
       <MainContainer>
         <li>
           {list.map((i) =>

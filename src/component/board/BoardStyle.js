@@ -12,8 +12,9 @@ export const BoardContainer = styled.div`
 
 export const BoardImage = styled.img`
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border: 1.5px solid #D0D7DE;
   border-radius: 50%;
   // background-image: url(${(props) => props.image});
 `
@@ -29,10 +30,12 @@ export const BoardInfoContainer = styled.div`
 export const BoardUserContainer = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 16px 0 4px 16px;
 `
 
 export const BoardContentContainer = styled.div`
+  border: 1.5px solid #D0D7DE;
   position: relative;
   border-radius: 10px;
   display: flex;

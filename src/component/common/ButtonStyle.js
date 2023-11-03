@@ -13,7 +13,6 @@ export const DefaultButton = styled.button`
   }
 
   &:active {
-
     background: #b76605;
   }
 `

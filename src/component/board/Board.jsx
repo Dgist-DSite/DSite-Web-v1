@@ -15,7 +15,7 @@ export default function Board({ model }) {
           <BoardUserContainer>
             <BoardImage src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRda07wG6u9LV0GR46yH2Y2PZjIA6wP_BWzArLzCWv1VVWe_TT_m01EXPBBW8osOu5fgk4&usqp=CAU"}/>
             <BoardInfoContainer>
-              <Label>{model.category}</Label>
+              {/*<Label>{model.category}</Label>*/}
               <TitleContainer>
                 <Title>{model.user}</Title>
               </TitleContainer>

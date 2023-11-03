@@ -23,7 +23,7 @@ export const NavContainer = styled.div`
   width: 100vw;
   background: white;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   border: 1px solid #D0D7DE;
   display: flex;
   align-items: center;
@@ -45,4 +45,22 @@ export const RightNav = styled.div`
 
 export const ButtonContainer = styled.div`
   margin-right: 30px;
+`
+
+export const RailContainer = styled.div`
+  padding-top: 4rem;
+  position: fixed;
+  height: 100vh;
+  width: 14rem;
+  background: white;
+  z-index: 1;
+  border: 1px solid #D0D7DE;
+  @media screen and (max-width: 68rem) {
+    width: 6rem;
+  }
+  
+  @media screen and (max-width: 52rem) {
+    display: none;
+  }
+  
 `
