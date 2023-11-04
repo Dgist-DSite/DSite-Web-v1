@@ -16,7 +16,6 @@ export const BoardImage = styled.img`
   height: 3rem;
   border: 1.5px solid #D0D7DE;
   border-radius: 50%;
-  // background-image: url(${(props) => props.image});
 `
 export const BoardInfoContainer = styled.div`
   display: flex;
@@ -34,7 +33,7 @@ export const BoardUserContainer = styled.div`
   margin: 16px 0 4px 16px;
 `
 
-export const BoardContentContainer = styled.div`
+export const BoardContentContainer = styled.a`
   border: 1.5px solid #D0D7DE;
   position: relative;
   border-radius: 10px;
@@ -43,7 +42,12 @@ export const BoardContentContainer = styled.div`
   align-content: flex-start;
   flex-wrap: wrap;
   background: #f1f1f1;
+  color: black;
   margin: 12px;
+  
+  &:visited {
+    color: black;
+  }
 `
 
 export const BoardThumbnale = styled.img`
@@ -71,4 +75,27 @@ export const TitleContainer = styled.div`
 
 export const BodyContainer = styled.div`
   color: #656D76;
+`
+
+export const DetailTitleContainer = styled.div`
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  display: -webkit-box;`
+
+export const DetailBodyContainer = styled.div`
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  display: -webkit-box;
+`
+
+export const DetailLabelContainer = styled.div`
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  display: -webkit-box;
 `
