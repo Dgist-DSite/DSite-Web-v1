@@ -5,7 +5,7 @@ export const AppContainer = styled.div`
 `
 
 export const MainContainer = styled.div`
-  width: 40rem;
+  width: 30rem;
   text-align: center;
   padding-top: 4rem;
   margin: 0 auto;

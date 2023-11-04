@@ -10,8 +10,7 @@ import {
   TitleContainer
 } from "./AppStyle";
 import {Body, LargeTitle, Title} from "./component/common/TextStyle";
-import axios from "axios";
-import {dgsiteAxios} from "./service/Service";
+import {dgsiteAxios, getNews} from "./service/Service";
 import {DefaultButton} from "./component/common/ButtonStyle";
 import DisplayAds from "./component/adsense/DisplayAds";
 
@@ -46,10 +45,10 @@ function App() {
   }])
 
   useEffect(() => {
-    //  dgsiteAxios({
-    //    method: 'get',
-    //    url: 'all'
-    // })
+    getNews()
+      .then(() => {
+
+      })
   }, []);
 
   return (
@@ -69,7 +68,6 @@ function App() {
         </RightNav>
       </NavContainer>
       <RailContainer>
-
       </RailContainer>
       <MainContainer>
         <li>

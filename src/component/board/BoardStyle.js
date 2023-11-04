@@ -6,7 +6,7 @@ export const BoardContainer = styled.div`
   background: #fff;
   border-radius: 10px;
   border: 1.5px solid #D0D7DE;
-  margin: 0.5rem;
+  margin: 1rem;
   cursor: pointer;
 `;
 
@@ -43,7 +43,7 @@ export const BoardContentContainer = styled.a`
   flex-wrap: wrap;
   background: #f1f1f1;
   color: black;
-  margin: 12px;
+  margin: 8px;
   
   &:visited {
     color: black;
@@ -61,7 +61,7 @@ export const BoardDetail = styled.div`
   flex-wrap: wrap;
   align-content: flex-start;
   text-align: left;
-  padding: 10px;
+  padding: 8px;
   position: absolute;
   width: 100%;
   background: #f1f1f1;

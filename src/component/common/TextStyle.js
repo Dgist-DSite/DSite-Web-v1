@@ -6,13 +6,13 @@ export const LargeTitle = styled.span`
 
 
 export const Title = styled.span`
-  font-size: 20px;
+  font-size: 18px;
 `
 
 export const Body = styled.span`
-  font-size: 16px;
+  font-size: 14px;
 `
 
 export const Label = styled.span`
-  font-size: 14px;
+  font-size: 11px;
 `
