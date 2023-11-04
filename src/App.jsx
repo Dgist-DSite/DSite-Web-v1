@@ -13,6 +13,7 @@ import {Body, LargeTitle, Title} from "./component/common/TextStyle";
 import axios from "axios";
 import {dgsiteAxios} from "./service/Service";
 import {DefaultButton} from "./component/common/ButtonStyle";
+import DisplayAds from "./component/adsense/DisplayAds";
 
 function App() {
   const [list, setList] = useState([{
@@ -72,6 +73,7 @@ function App() {
       </RailContainer>
       <MainContainer>
         <li>
+          <DisplayAds />
           {list.map((i) =>
             <ul>
               {<Board model={i}/> }
