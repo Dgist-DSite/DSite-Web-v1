@@ -2,7 +2,7 @@ import axios from "axios";
 import {Config} from "../config/config";
 
 export const dgsiteAxios = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: Config.SERVER_URL
 });
 
 console.log(Config.NEWS_API_KEY)
@@ -21,4 +21,31 @@ export const getNews = async () => {
     }
   })
   console.log(result.data.articles);
+}
+
+export const getPosts = async () => {
+  const result = await dgsiteAxios({
+    method: 'get',
+    url: '/all'
+  });
+  return result;
+}
+
+export const getPostById = async (postId) => {
+  const result = await dgsiteAxios({
+    method: 'get',
+    url: `/board/${postId}`,
+  })
+  console.log('getPostById', result);
+  return result;
+};
+
+export const getPostsByCategory = async (category) => {
+  const result = await dgsiteAxios({
+    method: 'get',
+    url: 'category',
+    params: {
+      what: category
+    }
+  })
 }

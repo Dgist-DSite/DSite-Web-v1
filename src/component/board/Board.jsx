@@ -22,7 +22,7 @@ export default function Board({ model }) {
               <Title>{model.userName}</Title>
             </TitleContainer>
             <BodyContainer>
-              <Body>{model.createdAt}</Body>
+              <Body>{model.regDate}</Body>
             </BodyContainer>
           </BoardInfoContainer>
         </BoardUserContainer>
