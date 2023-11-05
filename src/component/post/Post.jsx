@@ -1,9 +1,21 @@
 import {DefaultButton} from "../common/ButtonStyle";
-import {Body} from "../common/TextStyle";
-import {ButtonContainer, PostContainer} from "./PostStyle";
+import {Body, Title} from "../common/TextStyle";
+import {ButtonContainer, InputContainer, PostContainer} from "./PostStyle";
+import {useRef} from "react";
+import {DefaultInput} from "../common/InputStyle";
 
 
 export default function Post({ close }) {
+
+  const content = useRef("");
+  const url = useRef("");
+  const category = useRef("");
+
+  function onChange(e, type) {
+    type.current = e.target.value;
+  }
+
+
   return (
     <PostContainer>
 
@@ -13,9 +25,25 @@ export default function Post({ close }) {
         </DefaultButton>
       </ButtonContainer>
 
-      <div>input...</div>
+      <InputContainer>
+        <Title>카테고리</Title>
+      </InputContainer>
 
-      <div>submit...</div>
+      <InputContainer>
+        <Title>링크</Title>
+        <DefaultInput placeholder={'링크를 적어주세요'} ref={url} onChange={(e) => onChange(e, url)}/>
+      </InputContainer>
+
+      <InputContainer>
+        <Title>내용</Title>
+        <DefaultInput placeholder={'간단한 설명을 적어주세요'} ref={content} onChange={(e) => onChange(e, content)}/>
+      </InputContainer>
+
+
+
+      <DefaultButton>
+        <Body>업로드</Body>
+      </DefaultButton>
 
     </PostContainer>
   )
