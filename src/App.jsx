@@ -107,6 +107,8 @@ function App() {
       <RailContainer>
         <Rail text={'홈'}/>
         <Rail text={'로드맵'}/>
+        <Rail text={'컨퍼런스'}/>
+        <Rail text={'IT 뉴스'}/>
       </RailContainer>
       <MainContainer>
         <SettingContainer>
