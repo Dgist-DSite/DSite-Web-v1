@@ -52,7 +52,7 @@ export const uploadBoard = async (content, category, url) => {
     method: 'post',
     url: '/create',
     data: {
-      userName: "이강현",
+      userName: "익명의 대소고인",
       url: url,
       content: content,
       category: category,
