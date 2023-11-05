@@ -18,3 +18,11 @@ export const DefaultButton = styled.button`
     background-color: ${props => props.color ? props.color : '#985202'};
   }
 `
+
+export const SelectButtonStyle = styled.button`
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+`

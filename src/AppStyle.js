@@ -64,5 +64,16 @@ export const RailContainer = styled.div`
   @media screen and (max-width: 42rem) {
     display: none;
   }
-  
+`
+
+export const SettingContainer = styled.div`
+  display: flex;
+  padding-top: 1rem;
+  width: 85%;
+  margin: 0 auto;
+  overflow: scroll;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
 `

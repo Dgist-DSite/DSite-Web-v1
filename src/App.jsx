@@ -6,18 +6,19 @@ import {
   LeftNav,
   MainContainer, ModalBackdrop, ModalContainer,
   NavContainer, RailContainer,
-  RightNav,
+  RightNav, SettingContainer,
   TitleContainer
 } from "./AppStyle";
 import {Body, LargeTitle, Title} from "./component/common/TextStyle";
 import {dgsiteAxios, getNews, getBoards} from "./service/Service";
-import {DefaultButton} from "./component/common/ButtonStyle";
+import {DefaultButton, SelectButtonStyle} from "./component/common/ButtonStyle";
 import DisplayAds from "./component/adsense/DisplayAds";
 import {getTimeAgo} from "./util/Time";
 import Modal from "./component/modal/Modal";
 import Post from "./component/post/Post";
 import Rail from "./component/rail/Rail";
 import Detail from "./component/detail/Detail";
+import {Constant} from "./util/Constant";
 
 function App() {
   const [list, setList] = useState([]);
@@ -88,6 +89,13 @@ function App() {
         <Rail text={'로드맵'}/>
       </RailContainer>
       <MainContainer>
+        <SettingContainer>
+          {["전체", ...Constant.categoryList].map((i) => (
+            <SelectButtonStyle>
+              <Body>{i}</Body>
+            </SelectButtonStyle>
+          ))}
+        </SettingContainer>
         <li>
           {/*<DisplayAds/>*/}
           {list.map((i) =>
@@ -106,7 +114,6 @@ function App() {
           )}
         </li>
       </MainContainer>
-
     </AppContainer>
   );
 }

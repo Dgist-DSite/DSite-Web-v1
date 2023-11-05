@@ -7,12 +7,12 @@ import {dgsiteAxios, uploadBoard} from "../../service/Service";
 import {toast, ToastContainer} from "react-toastify";
 import {isValidUrl} from "../../util/Url";
 import 'react-toastify/dist/ReactToastify.css';
+import {Constant} from "../../util/Constant";
 
 export default function Post({ close }) {
   const warnNotify = (msg) => toast.warning(msg);
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
-  const categoryList = ["안드로이드", "웹", "iOS", "서버", "게임", "임베디드", "창업", "기타"];
   const [category, setCategory] = useState("");
 
   function onChange(e, func) {
@@ -51,7 +51,7 @@ export default function Post({ close }) {
       <InputContainer>
         <Title>카테고리</Title>
         <Select onChange={(e) => {setCategory(e.target.value)}} value={category}>
-          {categoryList.map((i) => (
+          {Constant.categoryList.map((i) => (
             <Option value={i} key={i}>{i}</Option>
           ))}
         </Select>
