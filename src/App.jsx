@@ -125,10 +125,10 @@ function App() {
           }/>}>
         </Modal>
         <li>
-          <DisplayAds/>
-          <DisplayAds/>
-          <DisplayAds/>
-          <DisplayAds/>
+          {/*<DisplayAds/>*/}
+          {/*<DisplayAds/>*/}
+          {/*<DisplayAds/>*/}
+          {/*<DisplayAds/>*/}
           {list.map((i) =>
             <ul>
               {<Board callback={() => {
