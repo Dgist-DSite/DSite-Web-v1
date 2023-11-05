@@ -14,7 +14,7 @@ export const MainContainer = styled.div`
 
   min-width: 300px;
 
-  @media screen and (max-width: 40rem) {
+  @media screen and (max-width: 30rem) {
     width: 100vw;
   }
 `
@@ -56,11 +56,11 @@ export const RailContainer = styled.div`
   background: white;
   z-index: 1;
   border: 1px solid #D0D7DE;
-  @media screen and (max-width: 68rem) {
+  @media screen and (max-width: 58rem) {
     width: 6rem;
   }
   
-  @media screen and (max-width: 52rem) {
+  @media screen and (max-width: 42rem) {
     display: none;
   }
   

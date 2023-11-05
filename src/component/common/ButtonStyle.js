@@ -5,14 +5,14 @@ export const DefaultButton = styled.button`
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background: #f69729;
+  background: ${props => props.color ? props.color : '#d97d14'};
   color: white;
 
   &:hover {
-    background: #d97d14;
+    background: ${props => props.color ? props.color : '#d97d14'};
   }
 
   &:active {
-    background: #b76605;
+    background: ${props => props.color ? props.color : '#d97d14'};
   }
 `

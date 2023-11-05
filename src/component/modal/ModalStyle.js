@@ -21,28 +21,6 @@ export const ModalBackdrop = styled.div`
   bottom : 0;
 `;
 
-export const ModalBtn = styled.button`
-  background-color: var(--coz-purple-600);
-  text-decoration: none;
-  border: none;
-  padding: 20px;
-  color: white;
-  border-radius: 30px;
-  cursor: grab;
-`;
-
-export const ExitBtn = styled(ModalBtn) `
-background-color : #4000c7;
-border-radius: 10px;
-text-decoration: none;
-margin: 10px;
-padding: 5px 10px;
-width: 40px;
-height: 40px;
-display : flex;
-justify-content : center;
-align-items : center;
-`;
 
 export const ModalView = styled.div.attrs((props) => ({
   role: 'dialog',

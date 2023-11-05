@@ -1,4 +1,4 @@
-import {ModalContainer, ModalBackdrop, ModalBtn, ModalView, ExitBtn} from "./ModalStyle";
+import {ModalContainer, ModalBackdrop, ModalView} from "./ModalStyle";
 
 export default function Modal({ isOpen, setIsOpen, content, children }) {
   const openModalHandler = () => {
