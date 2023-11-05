@@ -48,6 +48,7 @@ export const getPostsByCategory = async (category) => {
       what: category
     }
   })
+  return result;
 }
 
 export const uploadBoard = async (content, category, url) => {

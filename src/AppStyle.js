@@ -69,7 +69,8 @@ export const RailContainer = styled.div`
 export const SettingContainer = styled.div`
   display: flex;
   padding-top: 1rem;
-  width: 85%;
+  width: 100%;
+  align-content: center;
   margin: 0 auto;
   overflow: scroll;
   white-space: nowrap;

@@ -10,7 +10,7 @@ import {
   TitleContainer
 } from "./AppStyle";
 import {Body, LargeTitle, Title} from "./component/common/TextStyle";
-import {dgsiteAxios, getNews, getBoards} from "./service/Service";
+import {dgsiteAxios, getNews, getBoards, getPostsByCategory} from "./service/Service";
 import {DefaultButton, SelectButtonStyle} from "./component/common/ButtonStyle";
 import DisplayAds from "./component/adsense/DisplayAds";
 import {getTimeAgo} from "./util/Time";
@@ -25,6 +25,7 @@ function App() {
   const [clickedBoard, setClickedBoard] = useState(null);
   const [postModalOpen, setPostModalOpen] = useState(false);
   const [boardModalOpen, setBoardModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('전체');
 
   useEffect(() => {
     // TODO : getNews
@@ -39,17 +40,21 @@ function App() {
     getBoard();
   }, []);
 
+  function registerBoard(boards) {
+    boards.forEach((i) => {
+      const current = new Date() - 32400000; // 9시간
+      const regDate = new Date(i.regDate);
+      i.regDate = getTimeAgo(current, regDate);
+      console.log(i);
+    });
+    setList(boards);
+  }
+
   function getBoard() {
     getBoards()
       .then((i) => {
         const lst = i.data.data;
-        lst.forEach((i) => {
-          const current = new Date() - 32400000; // 9시간
-          const regDate = new Date(i.regDate);
-          i.regDate = getTimeAgo(current, regDate);
-          console.log(i);
-        });
-        setList(lst);
+        registerBoard(lst);
       });
   }
   function handlePostModalClose() {
@@ -60,6 +65,21 @@ function App() {
   function handleBoardModalClose() {
     setBoardModalOpen(false)
     getBoard();
+  }
+
+  function handleCategory(i) {
+    setSelectedCategory(i);
+    if (i === '전체') {
+      getBoard();
+    } else {
+      getPostsByCategory(i)
+        .then((r) => {
+          registerBoard(r.data.data);
+        })
+        .catch((e) => {
+          registerBoard([])
+        })
+    }
   }
 
   return (
@@ -91,25 +111,28 @@ function App() {
       <MainContainer>
         <SettingContainer>
           {["전체", ...Constant.categoryList].map((i) => (
-            <SelectButtonStyle>
-              <Body>{i}</Body>
+            <SelectButtonStyle onClick={() => handleCategory(i)}>
+              {selectedCategory === i
+                ? <Body style={{fontWeight: 'bold', color: '#f68809'}}>{i}</Body>
+                : <Body>{i}</Body>}
             </SelectButtonStyle>
           ))}
         </SettingContainer>
+
+        <Modal isOpen={boardModalOpen} setIsOpen={handleBoardModalClose} content={
+          <Detail model={clickedBoard} close={() => {
+            handleBoardModalClose();
+          }
+          }/>}>
+        </Modal>
         <li>
           {/*<DisplayAds/>*/}
           {list.map((i) =>
             <ul>
-              <Modal isOpen={boardModalOpen} setIsOpen={handleBoardModalClose} content={
-                <Detail model={clickedBoard} close={() => {
-                  handleBoardModalClose();
-                }
-                }/>}>
-                {<Board callback={() => {
-                  setClickedBoard(i);
-                  setBoardModalOpen(true);
-                }} model={i}/>}
-              </Modal>
+              {<Board callback={() => {
+                setClickedBoard(i);
+                setBoardModalOpen(true);
+              }} model={i}/>}
             </ul>
           )}
         </li>
