@@ -83,6 +83,7 @@ export const BodyContainer = styled.div`
 `
 
 export const DetailTitleContainer = styled.div`
+  width: 100%;
   overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -90,6 +91,7 @@ export const DetailTitleContainer = styled.div`
   display: -webkit-box;`
 
 export const DetailBodyContainer = styled.div`
+  width: 100%;
   overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -98,6 +100,7 @@ export const DetailBodyContainer = styled.div`
 `
 
 export const DetailLabelContainer = styled.div`
+  width: 100%;
   overflow: hidden;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
