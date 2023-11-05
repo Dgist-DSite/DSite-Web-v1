@@ -45,7 +45,6 @@ function App() {
       const current = new Date() - 32400000; // 9시간
       const regDate = new Date(i.regDate);
       i.regDate = getTimeAgo(current, regDate);
-      console.log(i);
     });
     setList(boards);
   }

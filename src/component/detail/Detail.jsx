@@ -15,7 +15,6 @@ export default function Detail({ model, close }) {
   let url = new URL(model.url)
 
   useEffect(() => {
-    console.log('model ------', model);
   }, []);
   return (
     <DetailContainer>

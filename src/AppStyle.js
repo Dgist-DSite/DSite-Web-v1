@@ -76,5 +76,4 @@ export const SettingContainer = styled.div`
   white-space: nowrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
 `

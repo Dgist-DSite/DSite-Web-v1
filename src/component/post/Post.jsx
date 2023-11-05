@@ -31,12 +31,10 @@ export default function Post({ close }) {
     uploadBoard(content, '안드로이드', url)
       .then((i) => {
         const data = i.data
-        console.log(data)
         close()
       })
     .catch((e) => {
       warnNotify('유효한 url을 적어주세요');
-      console.log(e.request)
     })
   }
 
