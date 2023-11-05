@@ -6,7 +6,7 @@ export const PostContainer = styled.div`
   padding: 10px;
   width: 36rem;
   align-items: center;
-  @media screen and (max-width: 100rem) {
+  @media screen and (max-width: 36rem) {
     width: 100vw;
   }
 `
@@ -25,14 +25,14 @@ export const InputContainer = styled.div`
   margin: 12px;
   gap: 4px;
   
-  @media screen and (max-width: 28rem) {
+  @media screen and (max-width: 36rem) {
     width: 100%;
   }
 `
 
 export const Select = styled.select`
   border: none;
-  padding: 8px 12px;
+  padding: 12px;
   border-radius: 4px;
   background-color: #f1f1f1;
 `

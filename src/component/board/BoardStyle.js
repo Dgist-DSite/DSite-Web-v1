@@ -1,7 +1,9 @@
 import {styled} from 'styled-components';
 
-export const BoardContainer = styled.div`
+export const BoardContainer = styled.button`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   background: #fff;
   border-radius: 10px;

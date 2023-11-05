@@ -23,7 +23,7 @@ export const getNews = async () => {
   console.log(result.data.articles);
 }
 
-export const getPosts = async () => {
+export const getBoards = async () => {
   const result = await dgsiteAxios({
     method: 'get',
     url: '/all'
@@ -31,21 +31,36 @@ export const getPosts = async () => {
   return result;
 }
 
-export const getPostById = async (postId) => {
+export const getBoardById = async (postId) => {
   const result = await dgsiteAxios({
     method: 'get',
     url: `/board/${postId}`,
   })
-  console.log('getPostById', result);
+  console.log('getBoardById', result);
   return result;
 };
 
 export const getPostsByCategory = async (category) => {
   const result = await dgsiteAxios({
     method: 'get',
-    url: 'category',
+    url: '/category',
     params: {
       what: category
     }
   })
+}
+
+export const uploadBoard = async (content, category, url) => {
+  console.log(content, category, url)
+  const result = await dgsiteAxios({
+    method: 'post',
+    url: '/create',
+    data: {
+      userName: "이강현",
+      url: url,
+      content: content,
+      category: category,
+    }
+  })
+  return result
 }
