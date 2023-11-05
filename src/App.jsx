@@ -16,6 +16,7 @@ import DisplayAds from "./component/adsense/DisplayAds";
 import {getTimeAgo} from "./util/Time";
 import Modal from "./component/modal/Modal";
 import Post from "./component/post/Post";
+import Rail from "./component/rail/Rail";
 
 function App() {
   const [list, setList] = useState([{
@@ -55,7 +56,6 @@ function App() {
 
   return (
     <AppContainer>
-
       <NavContainer>
         <LeftNav>
           <TitleContainer>
@@ -75,6 +75,8 @@ function App() {
         </RightNav>
       </NavContainer>
       <RailContainer>
+        <Rail text={'홈'}/>
+        <Rail text={'로드맵'}/>
       </RailContainer>
       <MainContainer>
         <li>

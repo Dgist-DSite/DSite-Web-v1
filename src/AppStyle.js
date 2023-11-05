@@ -28,6 +28,7 @@ export const NavContainer = styled.div`
   border: 1px solid #D0D7DE;
   display: flex;
   align-items: center;
+  min-width: 220px;
   justify-content: space-between;
 `
 

@@ -1,6 +1,6 @@
 import {DefaultButton} from "../common/ButtonStyle";
 import {Body, Title} from "../common/TextStyle";
-import {ButtonContainer, InputContainer, PostContainer} from "./PostStyle";
+import {ButtonContainer, InputContainer, PostContainer, Select, Option, SelectLabel} from "./PostStyle";
 import {useRef} from "react";
 import {DefaultInput} from "../common/InputStyle";
 
@@ -15,10 +15,8 @@ export default function Post({ close }) {
     type.current = e.target.value;
   }
 
-
   return (
     <PostContainer>
-
       <ButtonContainer>
         <DefaultButton color={'#D0D7DE'} onClick={() => close()}>
           <Body>닫기</Body>
@@ -27,6 +25,13 @@ export default function Post({ close }) {
 
       <InputContainer>
         <Title>카테고리</Title>
+        <Select>
+          <Option>카테고리 선택</Option>
+          <Option>안드로이드</Option>
+          <Option>서버</Option>
+          <Option>iOS</Option>
+          <Option>임베</Option>
+        </Select>
       </InputContainer>
 
       <InputContainer>
