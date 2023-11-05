@@ -28,7 +28,7 @@ export default function Post({ close }) {
       return;
     }
 
-    uploadBoard(content, '안드로이드', url)
+    uploadBoard(content, category, url)
       .then((i) => {
         const data = i.data
         close()

@@ -67,6 +67,7 @@ function App() {
   }
 
   function handleCategory(i) {
+    console.log(i);
     setSelectedCategory(i);
     if (i === '전체') {
       getBoard();

@@ -37,6 +37,7 @@ export const getBoardById = async (postId) => {
 };
 
 export const getPostsByCategory = async (category) => {
+  console.log(category);
   const result = await dgsiteAxios({
     method: 'get',
     url: '/category',
