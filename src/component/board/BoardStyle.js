@@ -74,7 +74,10 @@ export const TitleContainer = styled.div`
 `
 
 export const BodyContainer = styled.div`
+  display: flex;
   color: #656D76;
+  align-items: flex-start;
+  padding: 0 0 8px 12px;
 `
 
 export const DetailTitleContainer = styled.div`

@@ -21,9 +21,6 @@ export default function Board({ model }) {
             <TitleContainer>
               <Title>{model.userName}</Title>
             </TitleContainer>
-            <BodyContainer>
-              <Body>{model.regDate}</Body>
-            </BodyContainer>
           </BoardInfoContainer>
         </BoardUserContainer>
         <BoardContentContainer href={model.url} target="_blank">
@@ -40,6 +37,9 @@ export default function Board({ model }) {
             </DetailLabelContainer>
           </BoardDetail>
         </BoardContentContainer>
+        <BodyContainer>
+          <Body>{model.regDate}</Body>
+        </BodyContainer>
     </BoardContainer>
   )
 }
