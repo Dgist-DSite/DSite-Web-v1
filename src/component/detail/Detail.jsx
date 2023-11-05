@@ -12,6 +12,7 @@ import {
 } from "../board/BoardStyle";
 
 export default function Detail({ model, close }) {
+  console.log(model);
   let url = new URL(model.url)
 
   useEffect(() => {

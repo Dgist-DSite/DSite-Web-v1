@@ -1,24 +1,25 @@
 import axios from "axios";
 import {Config} from "../config/config";
 
-export const dgsiteAxios = axios.create({
+const dgsiteAxios = axios.create({
   baseURL: Config.SERVER_URL
 });
 
-export const newsAxios = axios.create({
+const newsAxios = axios.create({
   baseURL: Config.URL
-})
+});
 
 export const getNews = async () => {
-  const result = await newsAxios({
+  const result = newsAxios({
     method: 'get',
     url: '/everything',
     params: {
       apiKey: Config.NEWS_API_KEY,
       q: '인공지능'
     }
-  })
-}
+  });
+  return result;
+};
 
 export const getBoards = async () => {
   const result = await dgsiteAxios({
@@ -26,7 +27,7 @@ export const getBoards = async () => {
     url: '/all'
   });
   return result;
-}
+};
 
 export const getBoardById = async (postId) => {
   const result = await dgsiteAxios({
@@ -36,8 +37,7 @@ export const getBoardById = async (postId) => {
   return result;
 };
 
-export const getPostsByCategory = async (category) => {
-  console.log(category);
+export const getBoardsByCategory = async (category) => {
   const result = await dgsiteAxios({
     method: 'get',
     url: '/category',

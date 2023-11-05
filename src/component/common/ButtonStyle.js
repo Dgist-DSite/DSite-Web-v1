@@ -1,6 +1,6 @@
 import {styled} from "styled-components";
 
-export const DefaultButton = styled.button`
+export const DefaultButton = styled.a`
   border: none;
   padding: 8px 12px;
   border-radius: 8px;

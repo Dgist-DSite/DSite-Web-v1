@@ -4,13 +4,13 @@ import {
   AppContainer,
   ButtonContainer,
   LeftNav,
-  MainContainer, ModalBackdrop, ModalContainer,
+  MainContainer,
   NavContainer, RailContainer,
   RightNav, SettingContainer,
   TitleContainer
 } from "./AppStyle";
-import {Body, LargeTitle, Title} from "./component/common/TextStyle";
-import {dgsiteAxios, getNews, getBoards, getPostsByCategory} from "./service/Service";
+import {Body, Title} from "./component/common/TextStyle";
+import {getNews, getBoards, getBoardsByCategory} from "./service/Service";
 import {DefaultButton, SelectButtonStyle} from "./component/common/ButtonStyle";
 import DisplayAds from "./component/adsense/DisplayAds";
 import {getTimeAgo} from "./util/Time";
@@ -20,8 +20,17 @@ import Rail from "./component/rail/Rail";
 import Detail from "./component/detail/Detail";
 import {Constant} from "./util/Constant";
 
+const dummyList = [
+  // {
+  //   userName: "test",
+  //   image: "",
+  //   url: "http://google.com",
+  //   content: "content"
+  // }
+]
+
 function App() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(dummyList);
   const [clickedBoard, setClickedBoard] = useState(null);
   const [postModalOpen, setPostModalOpen] = useState(false);
   const [boardModalOpen, setBoardModalOpen] = useState(false);
@@ -35,10 +44,48 @@ function App() {
     //   })
   }, []);
 
-
   useEffect(() => {
-    getBoard();
+    getAllBoard();
   }, []);
+
+  function handlePostModalClose() {
+    setPostModalOpen(false);
+    getAllBoard();
+  }
+
+  function handleBoardModalClose() {
+    setBoardModalOpen(false)
+    getAllBoard();
+  }
+
+  function handleClickBoard(board) {
+    setClickedBoard(board);
+    setBoardModalOpen(true);
+  }
+
+  function getAllBoard() {
+    getBoards()
+      .then((i) => {
+        const lst = i.data.data;
+        registerBoard(lst);
+      });
+  }
+
+
+  function handleCategory(i) {
+    setSelectedCategory(i);
+    if (i === '전체') {
+      getAllBoard();
+    } else {
+      getBoardsByCategory(i)
+        .then((r) => {
+          registerBoard(r.data.data);
+        })
+        .catch((e) => {
+          registerBoard([]);
+        });
+    }
+  }
 
   function registerBoard(boards) {
     boards.forEach((i) => {
@@ -48,40 +95,6 @@ function App() {
     });
     setList(boards);
   }
-
-  function getBoard() {
-    getBoards()
-      .then((i) => {
-        const lst = i.data.data;
-        registerBoard(lst);
-      });
-  }
-  function handlePostModalClose() {
-    setPostModalOpen(false);
-    getBoard();
-  }
-
-  function handleBoardModalClose() {
-    setBoardModalOpen(false)
-    getBoard();
-  }
-
-  function handleCategory(i) {
-    console.log(i);
-    setSelectedCategory(i);
-    if (i === '전체') {
-      getBoard();
-    } else {
-      getPostsByCategory(i)
-        .then((r) => {
-          registerBoard(r.data.data);
-        })
-        .catch((e) => {
-          registerBoard([])
-        })
-    }
-  }
-
   return (
     <AppContainer>
       <NavContainer>
@@ -134,10 +147,7 @@ function App() {
           {/*<DisplayAds/>*/}
           {list.map((i) =>
             <ul>
-              {<Board callback={() => {
-                setClickedBoard(i);
-                setBoardModalOpen(true);
-              }} model={i}/>}
+              {<Board callback={(i) => handleClickBoard(i)} model={i}/>}
             </ul>
           )}
         </li>

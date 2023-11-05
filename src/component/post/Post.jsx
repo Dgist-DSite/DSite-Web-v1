@@ -14,6 +14,7 @@ export default function Post({ close }) {
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
   const [category, setCategory] = useState("");
+  const [isPosted, setIsPosted] = useState(false);
 
   function onChange(e, func) {
     func(e.target.value);
@@ -27,10 +28,17 @@ export default function Post({ close }) {
       warnNotify('내용을 적어주세요');
       return;
     }
-
+    if (isPosted) {
+      warnNotify('잠시만 기다려주세요..');
+      return;
+    }
     uploadBoard(content, category, url)
       .then((i) => {
         const data = i.data
+        setIsPosted(true);
+        setTimeout(() => {
+          setIsPosted(false);
+        }, 5000);
         close()
       })
     .catch((e) => {
