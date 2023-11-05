@@ -15,7 +15,7 @@ export default function Board({ model, callback }) {
   return (
     <BoardContainer onClick={() => callback()}>
         <BoardUserContainer>
-          <BoardImage src={"https://i.namu.wiki/i/EbJbfjm1JTDuv60L4JG11Fo27mXgNVvm2unFSzQ8ejK6kcDLNnhyRLYr2VoeO_akensh64iyoe0AGoqVR4Ucqw.webp"}/>
+          <BoardImage src={"https://hook-s3-innosync.s3.ap-northeast-2.amazonaws.com/images/initUserImage.png"}/>
           <BoardInfoContainer>
             <TitleContainer>
               <Title>{model.userName}</Title>
