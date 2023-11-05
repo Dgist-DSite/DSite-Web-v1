@@ -4,6 +4,7 @@ export const AppContainer = styled.div`
   text-align: center;
 `
 
+
 export const MainContainer = styled.div`
   width: 30rem;
   text-align: center;

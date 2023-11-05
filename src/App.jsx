@@ -4,7 +4,7 @@ import {
   AppContainer,
   ButtonContainer,
   LeftNav,
-  MainContainer,
+  MainContainer, ModalBackdrop, ModalContainer,
   NavContainer, RailContainer,
   RightNav,
   TitleContainer
@@ -14,11 +14,13 @@ import {dgsiteAxios, getNews, getPosts} from "./service/Service";
 import {DefaultButton} from "./component/common/ButtonStyle";
 import DisplayAds from "./component/adsense/DisplayAds";
 import {getTimeAgo} from "./util/Time";
+import Modal from "./component/modal/Modal";
 
 function App() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    // TODO : getNews
     // getNews()
     //   .then(() => {
     //
@@ -38,8 +40,11 @@ function App() {
       })
   }, []);
 
+  const [modalOpen, setModalOpen] = useState(true);
+
   return (
     <AppContainer>
+
       <NavContainer>
         <LeftNav>
           <TitleContainer>
@@ -48,9 +53,15 @@ function App() {
         </LeftNav>
         <RightNav>
           <ButtonContainer>
-            <DefaultButton>
-              <Body>블로그 공유</Body>
-            </DefaultButton>
+            <Modal isOpen={modalOpen} setIsOpen={setModalOpen} content={
+              <div>
+                Hello World!
+              </div>
+            }>
+              <DefaultButton onClick={() => setModalOpen(true)}>
+                <Body>블로그 공유</Body>
+              </DefaultButton>
+            </Modal>
           </ButtonContainer>
         </RightNav>
       </NavContainer>

@@ -17,7 +17,6 @@ export default function Board({ model }) {
         <BoardUserContainer>
           <BoardImage src={"https://i.namu.wiki/i/EbJbfjm1JTDuv60L4JG11Fo27mXgNVvm2unFSzQ8ejK6kcDLNnhyRLYr2VoeO_akensh64iyoe0AGoqVR4Ucqw.webp"}/>
           <BoardInfoContainer>
-            {/*<Label>{model.category}</Label>*/}
             <TitleContainer>
               <Title>{model.userName}</Title>
             </TitleContainer>
