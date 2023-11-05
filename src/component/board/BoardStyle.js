@@ -31,6 +31,7 @@ export const BoardInfoContainer = styled.div`
 export const BoardUserContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
   align-items: center;
   margin: 16px 0 4px 16px;
 `
@@ -45,6 +46,7 @@ export const BoardContentContainer = styled.a`
   flex-wrap: wrap;
   background: #f1f1f1;
   color: black;
+  width: calc(100% - 1rem);
   margin: 8px;
   
   &:visited {
