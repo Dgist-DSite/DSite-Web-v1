@@ -17,10 +17,13 @@ import {getTimeAgo} from "./util/Time";
 import Modal from "./component/modal/Modal";
 import Post from "./component/post/Post";
 import Rail from "./component/rail/Rail";
+import Detail from "./component/detail/Detail";
 
 function App() {
   const [list, setList] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [clickedBoard, setClickedBoard] = useState(null);
+  const [postModalOpen, setPostModalOpen] = useState(false);
+  const [boardModalOpen, setBoardModalOpen] = useState(false);
 
   useEffect(() => {
     // TODO : getNews
@@ -30,27 +33,31 @@ function App() {
     //   })
   }, []);
 
-  function getBoard() {
-    getBoards()
-      .then((i) => {
-        const lst = i.data.data
-        lst.forEach((i) => {
-          const current = new Date() - 32400000; // 9시간
-          const regDate = new Date(i.regDate)
-          i.regDate = getTimeAgo(current, regDate);
-          console.log(i)
-        })
-        setList(lst)
-      })
-  }
 
   useEffect(() => {
     getBoard();
   }, []);
 
-
+  function getBoard() {
+    getBoards()
+      .then((i) => {
+        const lst = i.data.data;
+        lst.forEach((i) => {
+          const current = new Date() - 32400000; // 9시간
+          const regDate = new Date(i.regDate);
+          i.regDate = getTimeAgo(current, regDate);
+          console.log(i);
+        });
+        setList(lst);
+      });
+  }
   function handlePostModalClose() {
-    setModalOpen(false);
+    setPostModalOpen(false);
+    getBoard();
+  }
+
+  function handleBoardModalClose() {
+    setBoardModalOpen(false)
     getBoard();
   }
 
@@ -64,12 +71,12 @@ function App() {
         </LeftNav>
         <RightNav>
           <ButtonContainer>
-            <Modal isOpen={modalOpen} setIsOpen={handlePostModalClose} content={
+            <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
               <Post close={() => {
                 handlePostModalClose()
               }
               }/>}>
-              <DefaultButton onClick={() => setModalOpen(true)}>
+              <DefaultButton onClick={() => setPostModalOpen(true)}>
                 <Body>블로그 공유</Body>
               </DefaultButton>
             </Modal>
@@ -85,11 +92,21 @@ function App() {
           {/*<DisplayAds/>*/}
           {list.map((i) =>
             <ul>
-              {<Board model={i}/>}
+              <Modal isOpen={boardModalOpen} setIsOpen={handleBoardModalClose} content={
+                <Detail model={clickedBoard} close={() => {
+                  handleBoardModalClose();
+                }
+                }/>}>
+                {<Board callback={() => {
+                  setClickedBoard(i);
+                  setBoardModalOpen(true);
+                }} model={i}/>}
+              </Modal>
             </ul>
           )}
         </li>
       </MainContainer>
+
     </AppContainer>
   );
 }

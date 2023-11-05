@@ -9,11 +9,11 @@ import {
 import React from "react";
 import {Body, Label, Title} from "../common/TextStyle";
 
-export default function Board({ model }) {
+export default function Board({ model, callback }) {
   let url = new URL(model.url)
 
   return (
-    <BoardContainer>
+    <BoardContainer onClick={() => callback()}>
         <BoardUserContainer>
           <BoardImage src={"https://i.namu.wiki/i/EbJbfjm1JTDuv60L4JG11Fo27mXgNVvm2unFSzQ8ejK6kcDLNnhyRLYr2VoeO_akensh64iyoe0AGoqVR4Ucqw.webp"}/>
           <BoardInfoContainer>
