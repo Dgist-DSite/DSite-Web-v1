@@ -147,7 +147,7 @@ function App() {
           {/*<DisplayAds/>*/}
           {list.map((i) =>
             <ul>
-              {<Board callback={(i) => handleClickBoard(i)} model={i}/>}
+              {<Board callback={() => handleClickBoard(i)} model={i}/>}
             </ul>
           )}
         </li>

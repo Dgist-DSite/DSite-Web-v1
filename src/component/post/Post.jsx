@@ -32,10 +32,10 @@ export default function Post({ close }) {
       warnNotify('잠시만 기다려주세요..');
       return;
     }
+    setIsPosted(true);
     uploadBoard(content, category, url)
       .then((i) => {
         const data = i.data
-        setIsPosted(true);
         setTimeout(() => {
           setIsPosted(false);
         }, 5000);
