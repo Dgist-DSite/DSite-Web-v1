@@ -9,7 +9,7 @@ import {
 import {Body} from "../common/TextStyle";
 import {Constant} from "../../util/Constant";
 import {Option} from "../post/PostStyle";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const nodeList = [
   {
@@ -240,6 +240,25 @@ export default function Roadmap() {
     }
     return result;
   }
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMouseX(e.pageX);
+      setMouseY(e.pageY);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const remSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const remX = mouseX / remSize;
+  const remY = mouseY / remSize;
+
+  console.log(parseInt(remX) - 14, parseInt(remY) - 4);
 
   return (
     <RoadmapContainer>
@@ -288,8 +307,6 @@ export default function Roadmap() {
           const startY = Math.min(midStartYPos, midEndYPos);
 
           const pathType = generatePath(path.type);
-
-          console.log(pathType[0]);
 
           const color = '#ddd'
 
