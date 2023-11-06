@@ -46,7 +46,10 @@ export const RightNav = styled.div`
 `
 
 export const ButtonContainer = styled.div`
-  margin-right: 30px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 4rem;
 `
 
 export const RailContainer = styled.div`

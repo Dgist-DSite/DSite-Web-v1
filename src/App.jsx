@@ -97,26 +97,17 @@ function App() {
   }
   return (
     <AppContainer>
+
       <NavContainer>
         <LeftNav>
           <TitleContainer>
             <Title>DSite</Title>
           </TitleContainer>
         </LeftNav>
-        <RightNav>
-          <ButtonContainer>
-            <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
-              <Post close={() => {
-                handlePostModalClose()
-              }
-              }/>}>
-              <DefaultButton onClick={() => setPostModalOpen(true)}>
-                <Body>블로그 공유</Body>
-              </DefaultButton>
-            </Modal>
-          </ButtonContainer>
-        </RightNav>
+        {/*<RightNav>*/}
+        {/*</RightNav>*/}
       </NavContainer>
+
       <RailContainer>
         <Rail text={'홈'}/>
         <Rail text={'로드맵'}/>
@@ -151,6 +142,22 @@ function App() {
             </ul>
           )}
         </li>
+
+
+        <ButtonContainer>
+          <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
+            <Post close={() => {
+              handlePostModalClose()
+            }
+            }/>}>
+            <DefaultButton style={{
+              padding: '12px 16px',
+              boxShadow: '1px 1px 6px #444444'
+            }} onClick={() => setPostModalOpen(true)}>
+              <Title>블로그 공유</Title>
+            </DefaultButton>
+          </Modal>
+        </ButtonContainer>
       </MainContainer>
     </AppContainer>
   );
