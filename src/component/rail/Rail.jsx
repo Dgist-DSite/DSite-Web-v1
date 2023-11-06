@@ -5,7 +5,9 @@ export default function Rail({ text }) {
   return (
     <RailContainer>
       <TextContainer>
-        <Title>
+        <Title style={{
+          color: 'black'
+        }}>
           {text}
         </Title>
       </TextContainer>

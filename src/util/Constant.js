@@ -4,3 +4,21 @@ export const Constant = {
 
 }
 
+export function generateRailPath(e) {
+  let result;
+  switch (e) {
+    case '홈':
+      result = '';
+      break;
+    case '로드맵':
+      result = 'roadmap'
+      break;
+    case '컨퍼런스':
+      result = 'conference';
+      break;
+    case 'IT 뉴스':
+      result = 'itnews';
+      break;
+  }
+  return result;
+}

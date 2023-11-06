@@ -1,4 +1,5 @@
 import {styled} from "styled-components";
+import {Link} from "react-router-dom";
 
 export const AppContainer = styled.div`
   text-align: center;
@@ -42,3 +43,12 @@ export const RailContainer = styled.div`
     display: none;
   }
 `
+
+export const Container = styled.div`
+  padding-top:  4rem;
+`
+
+export const LinkContainer = styled(Link)`
+  text-decoration: none;
+`
+
