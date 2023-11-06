@@ -42,6 +42,9 @@ export default function Post({ close }) {
         close()
       })
     .catch((e) => {
+      setTimeout(() => {
+        setIsPosted(false);
+      }, 5000);
       warnNotify('유효한 url을 적어주세요');
     })
   }
