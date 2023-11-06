@@ -28,6 +28,8 @@ export const LeftNav = styled.div`
     
 `
 export const RailContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   padding-top: 4rem;
   position: fixed;
   height: 100vh;
@@ -52,3 +54,7 @@ export const LinkContainer = styled(Link)`
   text-decoration: none;
 `
 
+export const TopContainer = styled.div``
+export const BottomContainer = styled.div`
+  margin-top: auto;
+`

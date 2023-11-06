@@ -1,10 +1,11 @@
 export const Constant = {
   categoryList: ["안드로이드", "웹", "iOS", "서버", "게임", "임베디드", "창업", "기타"],
-  railList: ['홈', '로드맵', '컨퍼런스', 'IT 뉴스'],
+  topRailList: ['홈', '로드맵', '컨퍼런스', 'IT 뉴스'],
+  bottomRailList: ['개인정보 처리방침'],
 
 }
 
-export function generateRailPath(e) {
+export function generateTopRailPath(e) {
   let result;
   switch (e) {
     case '홈':
@@ -21,4 +22,14 @@ export function generateRailPath(e) {
       break;
   }
   return result;
+}
+
+export function generateBottomRailPath(e) {
+  let result;
+  switch (e) {
+    case '개인정보 처리방침':
+      result = '/policy';
+      break;
+  }
+  return result
 }
