@@ -91,6 +91,18 @@ export default function Home() {
   return (
 
     <MainContainer>
+      <ButtonContainer>
+        <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
+          <Post close={() => {
+            handlePostModalClose()
+          }
+          }/>}>
+          <DefaultButton style={{
+          }} onClick={() => setPostModalOpen(true)}>
+            <Title>블로그 공유</Title>
+          </DefaultButton>
+        </Modal>
+      </ButtonContainer>
       <SettingContainer>
         {["전체", ...Constant.categoryList].map((i) => (
           <SelectButtonStyle onClick={() => handleCategory(i)}>
@@ -119,20 +131,7 @@ export default function Home() {
         )}
       </li>
 
-      <ButtonContainer>
-        <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
-          <Post close={() => {
-            handlePostModalClose()
-          }
-          }/>}>
-          <DefaultButton style={{
-            padding: '12px 16px',
-            boxShadow: '1px 1px 6px #444444'
-          }} onClick={() => setPostModalOpen(true)}>
-            <Title>블로그 공유</Title>
-          </DefaultButton>
-        </Modal>
-      </ButtonContainer>
+
     </MainContainer>
   )
 }

@@ -17,8 +17,9 @@ export const MainContainer = styled.div`
 export const ButtonContainer = styled.div`
   position: fixed;
   right: 0;
-  left: 0;
-  bottom: 4rem;
+  top: 0;
+  margin-top: 0.76rem;
+  margin-right: 2rem;
   z-index: 99;
 `
 

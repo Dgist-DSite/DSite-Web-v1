@@ -12,6 +12,7 @@ import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import Policy from "./component/policy/Policy";
 import {Divider} from "./component/rail/RailStyle";
+import Roadmap from "./component/roadmap/Roadmap";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Title>DSite</Title>
           </TitleContainer>
         </LeftNav>
+
         {/*<RightNav>*/}
         {/*</RightNav>*/}
       </NavContainer>
@@ -37,7 +39,7 @@ function App() {
         </TopContainer>
         <BottomContainer>
           <Divider/>
-          
+
           {Constant.bottomRailList.map((i) => (
             <LinkContainer to={`${generateBottomRailPath(i)}`}>
               <Rail text={i}/>
@@ -52,7 +54,7 @@ function App() {
             element={<Home/>}/>
           <Route
             path='/roadmap'
-            element={<div>출시 예정입니다!</div>}
+            element={<Roadmap/>}
           />
           <Route
             path='/conference'
