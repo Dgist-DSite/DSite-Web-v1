@@ -58,10 +58,10 @@ export const RailContainer = styled.div`
   z-index: 1;
   border: 1px solid #D0D7DE;
   @media screen and (max-width: 58rem) {
-    width: 6rem;
+    width: 7rem;
   }
   
-  @media screen and (max-width: 42rem) {
+  @media screen and (max-width: 44rem) {
     display: none;
   }
 `
