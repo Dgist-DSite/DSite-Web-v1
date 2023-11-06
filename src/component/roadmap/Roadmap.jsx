@@ -1,5 +1,15 @@
-import {RoadmapContainer, Node, DetailNode, NodeContainer, PathContainer} from "./RoadmapStyle";
+import {
+  RoadmapContainer,
+  Node,
+  DetailNode,
+  NodeContainer,
+  PathContainer,
+  CategorySelectorContainer, Select
+} from "./RoadmapStyle";
 import {Body} from "../common/TextStyle";
+import {Constant} from "../../util/Constant";
+import {Option} from "../post/PostStyle";
+import {useState} from "react";
 
 const nodeList = [
   {
@@ -194,6 +204,7 @@ const pathList = [
 ]
 
 export default function Roadmap() {
+  const [category, setCategory] = useState("");
 
   function getNodeById(id) {
     let result;
@@ -232,6 +243,13 @@ export default function Roadmap() {
 
   return (
     <RoadmapContainer>
+      <CategorySelectorContainer>
+        <Select onChange={(e) => {setCategory(e.target.value)}} value={category}>
+          {Constant.roadmapList.map((i) => (
+            <Option value={i} key={i}>{i}</Option>
+          ))}
+        </Select>
+      </CategorySelectorContainer>
       <NodeContainer>
         {nodeList.map((node) => (
           <Node style={{

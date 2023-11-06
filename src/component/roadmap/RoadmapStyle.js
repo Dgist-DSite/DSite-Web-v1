@@ -62,3 +62,19 @@ export const PathContainer = styled.div`
   border-style: solid;
   border-radius: 8px;
 `
+
+export const CategorySelectorContainer = styled.div`
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+`
+
+export const Select = styled.select`
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: white;
+  margin-top: 0.7rem;
+`
