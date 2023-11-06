@@ -19,6 +19,7 @@ export const ButtonContainer = styled.div`
   right: 0;
   left: 0;
   bottom: 4rem;
+  z-index: 99;
 `
 
 
