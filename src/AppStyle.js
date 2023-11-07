@@ -11,7 +11,7 @@ export const NavContainer = styled.div`
   width: 100vw;
   background: white;
   position: fixed;
-  z-index: 3;
+  z-index: 100;
   border: 1px solid #D0D7DE;
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@ export const RailContainer = styled.div`
   height: 100vh;
   width: 14rem;
   background: white;
-  z-index: 2;
+  z-index: 50;
   border: 1px solid #D0D7DE;
   @media screen and (max-width: 58rem) {
     width: 7rem;

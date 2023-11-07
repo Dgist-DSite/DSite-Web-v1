@@ -5,17 +5,17 @@ export const RoadmapContainer = styled.div`
   height: 100vh;
   background-color: #f4f4f4;
   position: relative;
-  padding-left: 14rem;
+  margin-left: 14rem;
 
   min-width: 100rem;
-  min-height: 100rem;
+  min-height: 150rem;
 
   @media screen and (max-width: 58rem) {
-    padding-left: 7rem;
+    margin-left: 7rem;
   }
 
   @media screen and (max-width: 44rem) {
-    padding-left: 0;
+    margin-left: 0;
   }
 
 `
@@ -31,26 +31,28 @@ export const NodeParent = styled.button`
   z-index: 1;
 `
 
-export const Node = styled(NodeParent)`
+export const SuperNode = styled(NodeParent)`
   background-color: #f68809;
   border-radius: 1000px;
   color: white;
   box-shadow: 1px 1px 4px #cccccc;
-
-  &:hover {
-    background-color: #d77504;
-  }
 `
 
-export const DetailNode = styled(NodeParent)`
-  cursor: pointer;
+
+export const NewSuperNode = styled(SuperNode)`
+  opacity: 0.75;
+  z-index: 2;
+`
+
+export const ChildNode = styled(NodeParent)`
   background-color: white;
   border: 2px solid #ddd;
-
-  &:hover {
-    background-color: #eeeeee;
-  }
 `
+
+export const NewChildNode = styled(ChildNode)`
+  opacity: 0.75;
+  z-index: 2;
+`;
 
 export const NodeContainer = styled.div`
   position: relative;
@@ -61,6 +63,7 @@ export const PathContainer = styled.div`
   background-color: transparent;
   border-style: solid;
   border-radius: 8px;
+  pointer-events: none;
 `
 
 export const CategorySelectorContainer = styled.div`
@@ -77,4 +80,23 @@ export const Select = styled.select`
   border-radius: 4px;
   background-color: white;
   margin-top: 0.7rem;
+`
+
+export const PathSelector = styled(NodeParent)`
+  background-color: transparent;
+  border: 1.5px solid #097ff6;
+  border-radius: 0;
+  z-index: 10;
+`
+
+export const Input = styled.input`
+  height: 2rem;
+  background-color: white;
+`
+
+export const FormContainer = styled.div`
+  position: fixed;
+  display: flex;
+  text-align: center;
+  margin: 20px;
 `

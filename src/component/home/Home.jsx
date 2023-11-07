@@ -63,7 +63,6 @@ export default function Home() {
       });
   }
 
-
   function handleCategory(i) {
     setSelectedCategory(i);
     if (i === '전체') {

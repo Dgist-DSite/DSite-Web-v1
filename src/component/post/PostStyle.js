@@ -9,6 +9,7 @@ export const PostContainer = styled.div`
   @media screen and (max-width: 36rem) {
     width: 100vw;
   }
+  z-index: 99;
 `
 
 export const ButtonContainer = styled.div`

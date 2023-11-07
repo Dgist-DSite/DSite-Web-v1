@@ -1,228 +1,149 @@
 import {
   RoadmapContainer,
-  Node,
-  DetailNode,
+  SuperNode,
+  ChildNode,
   NodeContainer,
   PathContainer,
-  CategorySelectorContainer, Select
+  CategorySelectorContainer, Select, NewSuperNode, PathSelector, NewChildNode, Input, FormContainer
 } from "./RoadmapStyle";
 import {Body} from "../common/TextStyle";
 import {Constant} from "../../util/Constant";
 import {Option} from "../post/PostStyle";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {addNode, addPath, fixNode, getPath, getRoadMap, removeNode} from "../../service/Service";
 
-const nodeList = [
-  {
-    id: 0,
-    xPos: 5,
-    yPos: 10,
-    text: '인터넷'
-  }, {
-    id: 3,
-    xPos: 26,
-    yPos: 12,
-    text: '언어배우기'
-  }, {
-    id: 4,
-    xPos: 26,
-    yPos: 30,
-    text: '데이터베이스'
-  }, {
-    id: 5,
-    xPos: 10,
-    yPos: 56,
-    text: '운영체제'
-  }, {
-    id: 6,
-    xPos: 16,
-    yPos: 70,
-    text: 'API'
-  }, {
-    id: 7,
-    xPos: 50,
-    yPos: 66,
-    text: '웹 보안'
-  }
-]
-
-const detailList = [
-  {
-    id: 1,
-    xPos: 11,
-    yPos: 15,
-    text: 'HTTP란 무엇인가?'
-  }, {
-    id: 2,
-    xPos: 11,
-    yPos: 18,
-    text: '인터넷 작동 원리'
-  }, {
-    id: 8,
-    xPos: 36,
-    yPos: 15,
-    text: 'javascript'
-  }, {
-    id: 9,
-    xPos: 36,
-    yPos: 18,
-    text: 'python'
-  }, {
-    id: 10,
-    xPos: 36,
-    yPos: 21,
-    text: 'java'
-  }, {
-    id: 11,
-    xPos: 26,
-    yPos: 43,
-    text: 'RDBMS'
-  }, {
-    id: 12,
-    xPos: 26,
-    yPos: 40,
-    text: 'NoSQL'
-  }, {
-    id: 13,
-    xPos: 36,
-    yPos: 40,
-    text: 'ORM'
-  }, {
-    id: 14,
-    xPos: 36,
-    yPos: 43,
-    text: 'DB 개론'
-  }, {
-    id: 15,
-    xPos: 26,
-    yPos: 67,
-    text: 'REST'
-  }, {
-    id: 16,
-    xPos: 26,
-    yPos: 64,
-    text: 'JSON'
-  }, {
-    id: 17,
-    xPos: 26,
-    yPos: 61,
-    text: 'Auth'
-  }, {
-    id: 18,
-    xPos: 20,
-    yPos: 56,
-    text: 'OS 작동 원리'
-  }, {
-    id: 19,
-    xPos: 20,
-    yPos: 50,
-    text: '메모리'
-  }, {
-    id: 20,
-    xPos: 20,
-    yPos: 53,
-    text: '프로세스'
-  }, {
-    id: 21,
-    xPos: 60,
-    yPos: 60,
-    text: '해싱알고리즘'
-  }, {
-    id: 22,
-    xPos: 60,
-    yPos: 57,
-    text: 'SSL/TLS'
-  }, {
-    id: 23,
-    xPos: 60,
-    yPos: 54,
-    text: 'CORS'
-  }
-]
-
-const pathList = [
-  {
-    startNodeId: 0,
-    endNodeId: 1,
-    type: 3
-  }, {
-    startNodeId: 0,
-    endNodeId: 2,
-    type: 3
-  }, {
-    startNodeId: 3,
-    endNodeId: 4,
-    type: 1
-  }, {
-    startNodeId: 0,
-    endNodeId: 3,
-    type: 1
-  }, {
-    startNodeId: 4,
-    endNodeId: 5,
-    type: 0
-  }, {
-    startNodeId: 5,
-    endNodeId: 6,
-    type: 3
-  }, {
-    startNodeId: 6,
-    endNodeId: 7,
-    type: 2
-  }, {
-    startNodeId: 3,
-    endNodeId: 8,
-    type: 3
-  }, {
-    startNodeId: 3,
-    endNodeId: 9,
-    type: 3
-  }, {
-    startNodeId: 3,
-    endNodeId: 10,
-    type: 3
-  }, {
-    startNodeId: 4,
-    endNodeId: 11,
-    type: 1
-  }, {
-    startNodeId: 4,
-    endNodeId: 14,
-    type: 1
-  }, {
-    startNodeId: 5,
-    endNodeId: 19,
-    type: 2
-  }, {
-    startNodeId: 6,
-    endNodeId: 17,
-    type: 2
-  }, {
-    startNodeId: 7,
-    endNodeId: 23,
-    type: 2
-  }
-]
+const d = false;
 
 export default function Roadmap() {
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(Constant.roadmapList[0]);
+
+  const [pathList, setPathList] = useState([]);
+  const [superNodeList, setSuperNodeList] = useState([]);
+  const [childNodeList, setChildNodeList] = useState([]);
+
+  const remSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
+
+  const [remX, setRemX] = useState(0);
+  const [remY, setRemY] = useState(0);
+
+  const [mode, setMode] = useState(null); // path, add
+  const [isPathing, setIsPathing] = useState(false);
+
+  const [hoveredNode, setHoveredNode] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const [secondNode, setSecondNode] = useState(null);
+
+  const [save, setSave] = useState(0);
+
+  const currentPathType = useRef(0);
+
+  const [isRePath, setIsRePath] = useState(true);
+
+  const [click, setClick] = useState(0);
+
+  const [isSuperNode, setIsSuperNode] = useState(false);
+  const [nodeText, setNodeText] = useState('');
+
+  const [clickedPos, setClickedPos] = useState({
+    xPos: null,
+    yPos: null
+  });
+
+  const [clickedNode, setClickedNode] = useState(null);
+  const [clickedNodeType, setClickedNodeType] = useState(null);
+  const [isDrawer, setIsDrawer] = useState(false);
+
+  function handleClickNode(node, nodeType) {
+    if (d) {
+      setClickedNodeType(nodeType);
+      setClickedNode(node);
+      setIsDrawer(false);
+      console.log(node);
+    }
+  }
 
   function getNodeById(id) {
     let result;
-    nodeList.forEach((i) => {
+    superNodeList.forEach((i) => {
       if (i.id == id) {
         result = i;
       }
-    })
-    detailList.forEach((i) => {
+    });
+
+    childNodeList.forEach((i) => {
       if (i.id == id) {
         result = i;
       }
-    })
+    });
 
     return result;
   }
 
-  function generatePath(type) {
+  function createNode(nodeText, isSuperNode, clickedPos) {
+    let nodeType;
+    if (isSuperNode) {
+      nodeType = 0;
+    } else {
+      nodeType = 1;
+    }
+    addNode(nodeText, nodeType, category, clickedPos.xPos, clickedPos.yPos)
+      .then(() => {
+        clearAddState();
+        node();
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  function editNode(nodeText, clickedNode) {
+    const {id, xPos, yPos} = clickedNode;
+    console.log(clickedNode);
+    const data = {
+      id: id,
+      text: nodeText,
+      nodeType: clickedNodeType,
+      category: category,
+      xpos: xPos,
+      ypos: yPos,
+    }
+    console.log(data)
+    fixNode(data)
+      .then(() => {
+        node();
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  useEffect(() => {
+    if (mode === 'add') {
+      if (!clickedPos.xPos || !clickedPos.yPos) {
+        console.log('clicked new node', isSuperNode, remX, remY);
+        setClickedPos({
+          xPos: remX,
+          yPos: remY
+        });
+      } else {
+
+      }
+    }
+  }, [click]);
+
+  function getMixedPathType() {
+    if (isRePath) {
+      return (currentPathType.current + 2) % 4;
+    } else {
+      return currentPathType.current;
+    }
+  }
+
+  function generatePathType(type) {
     let result;
     switch (type) {
       case 0:
@@ -240,10 +161,113 @@ export default function Roadmap() {
     }
     return result;
   }
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
+
+  function generatePathTypeByMouse(startX, startY, endX, endY) {
+    if (startX >= endX) {
+      if (startY >= endY) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } else {
+      if (startY >= endY) {
+        return 0;
+      } else {
+        return 3;
+      }
+    }
+  }
 
   useEffect(() => {
+    if (mode === 'path') {
+      if (secondNode != null) {
+        addPath(hoveredNode.id, secondNode.id, getMixedPathType(), category)
+          .then((i) => {
+
+          path();
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+      clearPathState();
+    }
+  }, [save]);
+
+  function clearPathState() {
+    setIsPathing(false);
+    setIsHovered(false);
+    setSecondNode(null);
+    setHoveredNode(null);
+  }
+
+  function clearAddState() {
+    setIsSuperNode(false);
+    setNodeText('');
+    setClickedPos(() => ({
+      xPos: null,
+      yPos: null
+    }));
+  }
+
+  const [key, setkey] = useState('');
+  const [keyL, setkeyL] = useState(0);
+  useEffect(() => {
+    console.log(key);
+    setIsDrawer(false);
+    if (clickedPos.xPos && clickedPos.yPos) {
+      console.log('break');
+      return;
+    } else {
+      console.log('pass');
+    }
+    if (key === 'q') {
+      clearPathState();
+      clearAddState();
+      setMode('add');
+    }
+    if (key === 'w') {
+      clearPathState();
+      clearAddState();
+      setMode('path');
+    }
+    if (key === 'e') {
+      clearPathState();
+      clearAddState();
+      setMode(null);
+    }
+    if (key === 's') {
+      setIsRePath(i => !i);
+    }
+    if (key === 'a') {
+      setIsSuperNode(i => !i);
+    }
+    if (mode === null) {
+      if (key === 'x' && clickedNode) {
+        removeNode(clickedNode.id)
+          .then(() => {
+            node();
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+    }
+  }, [keyL]);
+
+  useEffect(() => {
+    window.onmouseup = () => {
+      setSave(i => i + 1);
+    };
+    window.onmousedown = () => {
+      setClick(i => i + 1);
+    }
+    window.onkeydown = (e) => {
+      if (d) {
+        setkey(e.key);
+        setkeyL(i => i + 1);
+      }
+    };
     const handleMouseMove = (e) => {
       setMouseX(e.pageX);
       setMouseY(e.pageY);
@@ -254,78 +278,289 @@ export default function Roadmap() {
     };
   }, []);
 
-  const remSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-  const remX = mouseX / remSize;
-  const remY = mouseY / remSize;
+  useEffect(() => {
+    const calcedX = parseInt(mouseX / remSize) - 14;
+    const calcedY = parseInt(mouseY / remSize) - 4;
 
-  console.log(parseInt(remX) - 14, parseInt(remY) - 4);
+    if (calcedX != remX || calcedY != remY) {
+      setRemX(calcedX);
+      setRemY(calcedY);
+    }
+  }, [mouseX, mouseY]);
+
+  function generatePathData(startNodeId, endNodeId) {
+    const startNode = getNodeById(startNodeId);
+    const endNode = getNodeById(endNodeId);
+
+    const midStartXPos = startNode.xPos + 4.5;
+    const midStartYPos = startNode.yPos + 1.4;
+
+    const midEndXPos = endNode.xPos + 4.5;
+    const midEndYPos = endNode.yPos + 1.4;
+
+    const width = Math.abs(midStartXPos - midEndXPos);
+    const height = Math.abs(midStartYPos - midEndYPos);
+
+    const startX = Math.min(midStartXPos, midEndXPos);
+    const startY = Math.min(midStartYPos, midEndYPos);
+    return {startX, startY, width, height};
+  }
+
+  function generatePathDataByMouse(startNodeId, endNode) {
+    const startNode = getNodeById(startNodeId);
+
+    const midStartXPos = startNode.xPos + 4.5;
+    const midStartYPos = startNode.yPos + 1.4;
+
+    const midEndXPos = endNode.xPos;
+    const midEndYPos = endNode.yPos;
+
+    const width = Math.abs(midStartXPos - midEndXPos);
+    const height = Math.abs(midStartYPos - midEndYPos);
+
+    const startX = Math.min(midStartXPos, midEndXPos);
+    const startY = Math.min(midStartYPos, midEndYPos);
+    return {startX, startY, width, height};
+  }
+
+  function handleCategory(e) {
+    const newCategory = e.target.value;
+    setCategory(newCategory);
+  }
+
+  function node() {
+    getRoadMap(category)
+      .then((e) => {
+        const {superNodeList, childNodeList} = e;
+        setChildNodeList(childNodeList);
+        setSuperNodeList(superNodeList);
+      })
+      .catch(e => {
+        console.log(e.message);
+      });
+  }
+
+  function path() {
+    getPath(category)
+      .then((i) => {
+        setPathList(i);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  useEffect(() => {
+    node();
+    path();
+  }, [category]);
 
   return (
     <RoadmapContainer>
       <CategorySelectorContainer>
-        <Select onChange={(e) => {setCategory(e.target.value)}} value={category}>
+        <Select onChange={handleCategory} value={category}>
           {Constant.roadmapList.map((i) => (
             <Option value={i} key={i}>{i}</Option>
           ))}
         </Select>
       </CategorySelectorContainer>
+      {(hoveredNode && isHovered && mode === 'path') || isPathing ?
+        <PathSelector
+          onMouseDown={() => {
+            setIsPathing(true);
+          }}
+          onMouseOut={() => {
+            if (!isPathing) {
+              setIsHovered(false);
+            }
+          }}
+          style={{
+            left: hoveredNode.xPos + 'rem',
+            top: hoveredNode.yPos + 'rem'
+          }}/> : null}
+      {secondNode ? <PathSelector
+        onMouseOut={() => {
+          if (secondNode) {
+            setSecondNode(null);
+          }
+        }}
+        style={{
+          left: secondNode.xPos + 'rem',
+          top: secondNode.yPos + 'rem',
+        }}
+      /> : null}
+      {mode === 'add' ? (() => {
+        if (isSuperNode) {
+          return (
+            <NewSuperNode
+              style={!clickedPos.xPos || !clickedPos.yPos ? {
+                left: remX + 'rem',
+                top: remY + 'rem'
+              } : {
+                left: clickedPos.xPos + 'rem',
+                top: clickedPos.yPos + 'rem'
+              }}
+            >{'new super node'}
+            </NewSuperNode>)
+        } else {
+          return (
+            <NewChildNode
+              style={!clickedPos.xPos || !clickedPos.yPos ? {
+                left: remX + 'rem',
+                top: remY + 'rem'
+              } : {
+                left: clickedPos.xPos + 'rem',
+                top: clickedPos.yPos + 'rem'
+              }}>
+              {'new child node'}
+            </NewChildNode>
+          );
+        };
+      })() : null}
       <NodeContainer>
-        {nodeList.map((node) => (
-          <Node style={{
-            left: node.xPos + 'rem',
-            top: node.yPos + 'rem'
+        {(clickedPos.xPos && clickedPos.yPos) || (mode === null && clickedNode) ? (
+          <FormContainer style={{
+            // left: clickedPos.xPos + 12 + 'rem',
+            // top: clickedPos.yPos + 5 + 'rem'
           }}>
+          <Input style={{
+            zIndex: 300
+          }} value={nodeText} onChange={(e) => setNodeText(e.target.value)}/>
+          <button style={{
+            zIndex: 200
+          }} onClick={() => {
+            if (mode === null) {
+              editNode(nodeText, clickedNode);
+            } else {
+              createNode(nodeText, isSuperNode, clickedPos);
+            }
+          }}>
+            생성
+          </button>
+          <button onClick={() => {
+            setClickedPos((e) => ({
+              xPos: null,
+              yPos: null
+            }));
+          }}>
+            취소
+          </button>
+        </FormContainer>) : null}
+
+        {superNodeList.map((node) => (
+          <SuperNode
+            onClick={() => {
+              handleClickNode(node, 0);
+            }}
+            onMouseOver={() => {
+              setIsHovered(true);
+              if (!isPathing) {
+                setHoveredNode(node);
+              } else {
+                setSecondNode(node);
+              }
+            }}
+            style={{
+              left: node.xPos + 'rem',
+              top: node.yPos + 'rem'
+            }}>
             <Body style={{
               fontSize: '16px'
             }}>{node.text}</Body>
-          </Node>
+          </SuperNode>
         ))}
-        {detailList.map((node) => (
-          <DetailNode style={{
-            left: node.xPos + 'rem',
-            top: node.yPos + 'rem'
-          }}>
+        {childNodeList.map((node) => (
+          <ChildNode
+            onClick={() => {
+              handleClickNode(node, 1);
+            }}
+            onMouseOver={() => {
+              setIsHovered(true);
+              if (!isPathing) {
+                setHoveredNode(node);
+              } else {
+                setSecondNode(node);
+              }
+            }}
+            style={{
+              left: node.xPos + 'rem',
+              top: node.yPos + 'rem',
+            }}>
             <Body>
               {node.text}
             </Body>
-          </DetailNode>
+          </ChildNode>
         ))}
         {pathList.map((path) => {
-          const startNode = getNodeById(path.startNodeId);
-          const endNode = getNodeById(path.endNodeId);
-
-          const midStartXPos = startNode.xPos + 4.5;
-          const midStartYPos = startNode.yPos + 1.4;
-
-          const midEndXPos = endNode.xPos + 4.5;
-          const midEndYPos = endNode.yPos + 1.4;
-
-          const width = Math.abs(midStartXPos - midEndXPos);
-          const height = Math.abs(midStartYPos - midEndYPos);
-
-          const startX = Math.min(midStartXPos, midEndXPos);
-          const startY = Math.min(midStartYPos, midEndYPos);
-
-          const pathType = generatePath(path.type);
-
-          const color = '#ddd'
-
+          let startX;
+          let startY;
+          let width;
+          let height;
+          try {
+            const pathData = generatePathData(path.startNodeId, path.endNodeId);
+            startX = pathData.startX;
+            startY = pathData.startY;
+            width = pathData.width;
+            height = pathData.height;
+          } catch {
+            console.log('salkdjsad');
+            return;
+          }
+          currentPathType.current = path.type;
+          const pathType = generatePathType(path.type);
+          const color = '#ddd';
           return (
-            <PathContainer style={{
-              left: startX + 'rem',
-              top: startY + 'rem',
-              width: width + 'rem',
-              height: height + 'rem',
-              borderTop: `${pathType[0]}px solid ${color}`,
-              borderRight: `${pathType[1]}px solid ${color}`,
-              borderBottom: `${pathType[2]}px solid ${color}`,
-              borderLeft: `${pathType[3]}px solid ${color}`,
-            }}>
-
-            </PathContainer>
+            <PathContainer
+              style={{
+                left: startX + 'rem',
+                top: startY + 'rem',
+                width: width + 'rem',
+                height: height + 'rem',
+                borderTop: `${pathType[0]}px solid ${color}`,
+                borderRight: `${pathType[1]}px solid ${color}`,
+                borderBottom: `${pathType[2]}px solid ${color}`,
+                borderLeft: `${pathType[3]}px solid ${color}`,
+              }}/>
           )
         })}
+        {isHovered && isPathing ? (() => {
+
+          let endX;
+          let endY;
+
+          if (!secondNode) {
+            endX = remX + 0.5;
+            endY = remY + 0.5;
+          } else {
+            endX = secondNode.xPos + 4.5;
+            endY = secondNode.yPos + 1.4;
+          }
+
+          const {startX, startY, width, height} = generatePathDataByMouse(hoveredNode.id, {
+            xPos: endX,
+            yPos: endY
+          });
+          const color = '#097ff6';
+
+          const type = generatePathTypeByMouse(startX, startY, endX, endY);
+          currentPathType.current = type;
+          const pathType = generatePathType(getMixedPathType());
+
+          return (
+            <PathContainer
+              style={{
+                left: startX + 'rem',
+                top: startY + 'rem',
+                width: width + 'rem',
+                height: height + 'rem',
+                borderTop: `${pathType[0]}px solid ${color}`,
+                borderRight: `${pathType[1]}px solid ${color}`,
+                borderBottom: `${pathType[2]}px solid ${color}`,
+                borderLeft: `${pathType[3]}px solid ${color}`,
+                borderRadius: 0
+              }}/>)
+        })() : null}
       </NodeContainer>
     </RoadmapContainer>
   );
-}
+};
