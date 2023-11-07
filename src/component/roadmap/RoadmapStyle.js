@@ -7,7 +7,7 @@ export const RoadmapContainer = styled.div`
   position: relative;
   margin-left: 14rem;
 
-  min-width: 100rem;
+  min-width: 120rem;
   min-height: 150rem;
 
   @media screen and (max-width: 58rem) {
