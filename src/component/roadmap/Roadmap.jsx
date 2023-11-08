@@ -13,7 +13,7 @@ import {useEffect, useRef, useState} from "react";
 import {addNode, addPath, fixNode, getPath, getRoadMap, removeNode} from "../../service/Service";
 import Drawer from "../drawer/Drawer";
 
-const d = false;
+const d = true;
 
 export default function Roadmap() {
   const [category, setCategory] = useState(Constant.roadmapList[0]);
@@ -61,6 +61,10 @@ export default function Roadmap() {
   function handleClickNode(node, nodeType) {
     setIsDrawer(true);
     if (d) {
+      setClickedPos({
+        xPos: node.xPos,
+        yPos: node.yPos
+      })
       setClickedNodeType(nodeType);
       setClickedNode(node);
       console.log(node);
@@ -125,7 +129,6 @@ export default function Roadmap() {
   useEffect(() => {
     if (mode === 'add') {
       if (!clickedPos.xPos || !clickedPos.yPos) {
-        console.log('clicked new node', isSuperNode, remX, remY);
         setClickedPos({
           xPos: remX,
           yPos: remY
@@ -214,12 +217,20 @@ export default function Roadmap() {
   const [key, setkey] = useState('');
   const [keyL, setkeyL] = useState(0);
   useEffect(() => {
-    console.log(key);
+    if (mode === null) {
+      if (key === 'x' && clickedNode) {
+        removeNode(clickedNode.id)
+          .then(() => {
+            node();
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
+    }
     if (clickedPos.xPos && clickedPos.yPos) {
-      console.log('break');
       return;
     } else {
-      console.log('pass');
     }
     if (key === 'q') {
       clearPathState();
@@ -242,17 +253,7 @@ export default function Roadmap() {
     if (key === 'a') {
       setIsSuperNode(i => !i);
     }
-    if (mode === null) {
-      if (key === 'x' && clickedNode) {
-        removeNode(clickedNode.id)
-          .then(() => {
-            node();
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
-    }
+
   }, [keyL]);
 
   useEffect(() => {
@@ -356,8 +357,9 @@ export default function Roadmap() {
   }, [category]);
   return (
     <RoadmapContainer>
-      <Drawer isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
-      </Drawer>
+      {!d ? <Drawer isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
+      </Drawer> : null}
+
       <CategorySelectorContainer>
         <Select onChange={handleCategory} value={category}>
           {Constant.roadmapList.map((i) => (
@@ -431,6 +433,11 @@ export default function Roadmap() {
             zIndex: 200
           }} onClick={() => {
             if (mode === null) {
+              setClickedNode((e) => ({
+                xPos: null,
+                yPos: null,
+              }));
+              setClickedNode(null);
               editNode(nodeText, clickedNode);
             } else {
               createNode(nodeText, isSuperNode, clickedPos);
@@ -443,6 +450,7 @@ export default function Roadmap() {
               xPos: null,
               yPos: null
             }));
+            setClickedNode(null);
           }}>
             취소
           </button>

@@ -34,6 +34,9 @@ export const BoardUserContainer = styled.div`
   width: 100%;
   align-items: center;
   margin: 16px 0 4px 16px;
+  @media screen and (max-width: 44rem) {
+    margin: 16px 0;
+  }
 `
 
 export const BoardContentContainer = styled.a`

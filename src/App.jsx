@@ -27,9 +27,6 @@ function App() {
             <Title>DSite</Title>
           </TitleContainer>
         </LeftNav>
-
-        {/*<RightNav>*/}
-        {/*</RightNav>*/}
       </NavContainer>
 
       <RailContainer>
@@ -70,6 +67,10 @@ function App() {
           <Route
             path='/policy'
             element={<Policy/>}
+          />
+          <Route
+            path='/roadmap-mobile'
+            element={<Roadmap/>}
           />
         </Routes>
       </Container>
