@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 export const AppContainer = styled.div`
   text-align: center;
-`
+`;
 
 
 export const NavContainer = styled.div`
@@ -17,7 +17,7 @@ export const NavContainer = styled.div`
   align-items: center;
   min-width: 400px;
   justify-content: space-between;
-`
+`;
 
 export const TitleContainer = styled(Link)`
   margin-left: 30px;
@@ -26,14 +26,18 @@ export const TitleContainer = styled(Link)`
   color: black;
   display: flex;
   align-items: center;
-`
+  @media screen and (max-width: 44rem) {
+    margin-left: 12px;
+  }
+`;
 
 export const ImageContainer = styled.img`
   width: 2rem;
   height: 2rem;
   border-radius: 100px;
   margin-right: 12px;
-`
+`;
+
 
 export const LeftNav = styled.div`
     
@@ -74,7 +78,7 @@ export const LinkContainer = styled(Link)`
 
 export const TopContainer = styled.div`
   @media screen and (max-width: 44rem) {
-    min-width: 400px;
+    min-width: 300px;
     width: 100%;
     display: flex;
     flex-direction: row;

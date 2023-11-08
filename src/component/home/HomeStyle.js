@@ -6,8 +6,7 @@ export const MainContainer = styled.div`
   margin: 0 auto;
   list-style: none;
 
-  min-width: 400px;
-
+  min-width: 280px;
   @media screen and (max-width: 30rem) {
     width: 100vw;
   }
@@ -21,6 +20,9 @@ export const ButtonContainer = styled.div`
   margin-top: 0.76rem;
   margin-right: 2rem;
   z-index: 200;
+  @media screen and (max-width: 44rem) {
+    margin-right: 1rem;
+  }
 `
 
 

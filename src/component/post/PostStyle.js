@@ -8,6 +8,7 @@ export const PostContainer = styled.div`
   align-items: center;
   @media screen and (max-width: 36rem) {
     width: 100vw;
+    padding: 0 10px;
   }
   z-index: 99;
 `
