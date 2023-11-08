@@ -7,8 +7,8 @@ export const RoadmapContainer = styled.div`
   position: relative;
   margin-left: 14rem;
 
-  min-width: 120rem;
-  min-height: 150rem;
+  //min-width: 120rem;
+  //min-height: 150rem;
   
   overflow: scroll;
 

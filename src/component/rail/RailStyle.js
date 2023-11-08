@@ -9,6 +9,8 @@ export const RailContainer = styled.div`
 
   @media screen and (max-width: 58rem) {
     align-items: center;
+    align-content: center;
+    justify-content: center;
   }
   @media screen and (max-width: 44rem) {
     height: 100%;
