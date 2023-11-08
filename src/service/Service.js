@@ -148,3 +148,22 @@ export const addPath = async (startNodeId, endNodeId, type, category) => {
   return result;
 }
 
+export const addNodeBoard = async (nodeId, url) => {
+  const result = await dgsiteAxios({
+    method: 'post',
+    url: `/roadmap/board/`,
+    data: {
+      nodeId: nodeId,
+      url: url,
+    }
+  });
+  return result;
+};
+
+export const getNodeBoard = async (nodeId) => {
+  const result = await dgsiteAxios({
+    method: 'get',
+    url: `/roadmap/board/${nodeId}`
+  });
+  return result.data.data;
+};
