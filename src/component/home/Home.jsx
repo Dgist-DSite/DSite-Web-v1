@@ -60,6 +60,9 @@ export default function Home() {
       .then((i) => {
         const lst = i.data.data;
         registerBoard(lst);
+      })
+      .catch(e => {
+
       });
   }
 
