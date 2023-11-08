@@ -11,6 +11,7 @@ import {Constant} from "../../util/Constant";
 import {Option} from "../post/PostStyle";
 import {useEffect, useRef, useState} from "react";
 import {addNode, addPath, fixNode, getPath, getRoadMap, removeNode} from "../../service/Service";
+import Drawer from "../drawer/Drawer";
 
 const d = false;
 
@@ -55,13 +56,13 @@ export default function Roadmap() {
 
   const [clickedNode, setClickedNode] = useState(null);
   const [clickedNodeType, setClickedNodeType] = useState(null);
-  const [isDrawer, setIsDrawer] = useState(false);
+  const [isDrawer, setIsDrawer] = useState(true);
 
   function handleClickNode(node, nodeType) {
+    setIsDrawer(true);
     if (d) {
       setClickedNodeType(nodeType);
       setClickedNode(node);
-      setIsDrawer(false);
       console.log(node);
     }
   }
@@ -214,7 +215,6 @@ export default function Roadmap() {
   const [keyL, setkeyL] = useState(0);
   useEffect(() => {
     console.log(key);
-    setIsDrawer(false);
     if (clickedPos.xPos && clickedPos.yPos) {
       console.log('break');
       return;
@@ -354,9 +354,10 @@ export default function Roadmap() {
     node();
     path();
   }, [category]);
-
   return (
     <RoadmapContainer>
+      <Drawer isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
+      </Drawer>
       <CategorySelectorContainer>
         <Select onChange={handleCategory} value={category}>
           {Constant.roadmapList.map((i) => (
@@ -503,7 +504,6 @@ export default function Roadmap() {
             width = pathData.width;
             height = pathData.height;
           } catch {
-            console.log('salkdjsad');
             return;
           }
           currentPathType.current = path.type;

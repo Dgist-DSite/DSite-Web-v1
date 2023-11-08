@@ -26,3 +26,10 @@ export const SelectButtonStyle = styled.button`
   background-color: white;
   color: black;
 `
+export const TransparentButton = styled.button`
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+`
