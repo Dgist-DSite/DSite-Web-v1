@@ -15,7 +15,7 @@ export const NavContainer = styled.div`
   border: 1px solid #D0D7DE;
   display: flex;
   align-items: center;
-  min-width: 220px;
+  min-width: 400px;
   justify-content: space-between;
 `
 
@@ -42,7 +42,11 @@ export const RailContainer = styled.div`
   }
   
   @media screen and (max-width: 44rem) {
-    display: none;
+    width: 100vw;
+    height: 4rem;
+    flex-direction: row;
+    bottom: 0;
+    padding-top: 0;
   }
 `
 
@@ -52,9 +56,23 @@ export const Container = styled.div`
 
 export const LinkContainer = styled(Link)`
   text-decoration: none;
+  @media screen and (max-width: 44rem) {
+    width: 100%;
+  }
 `
 
-export const TopContainer = styled.div``
+export const TopContainer = styled.div`
+  min-width: 400px;
+  @media screen and (max-width: 44rem) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+`
 export const BottomContainer = styled.div`
+  width: 100%;
+  @media screen and (max-width: 44rem) {
+    display: none;
+  }
   margin-top: auto;
 `

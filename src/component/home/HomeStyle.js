@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   margin: 0 auto;
   list-style: none;
 
-  min-width: 300px;
+  min-width: 400px;
 
   @media screen and (max-width: 30rem) {
     width: 100vw;
