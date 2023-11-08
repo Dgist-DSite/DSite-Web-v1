@@ -76,10 +76,10 @@ export const CategorySelectorContainer = styled.div`
 
 export const Select = styled.select`
   border: none;
-  padding: 12px;
+  margin: calc(12px + 0.7rem) 12px 12px 12px;
   border-radius: 4px;
   background-color: white;
-  margin-top: 0.7rem;
+  cursor: pointer;
 `
 
 export const PathSelector = styled(NodeParent)`
