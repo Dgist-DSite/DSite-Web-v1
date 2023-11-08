@@ -10,7 +10,7 @@ import {Body} from "../common/TextStyle";
 import {Constant} from "../../util/Constant";
 import {Option} from "../post/PostStyle";
 import {useEffect, useRef, useState} from "react";
-import {addNode, addPath, fixNode, getPath, getRoadMap, removeNode} from "../../service/Service";
+import {addNode, addPath, fixNode, getNodeBoard, getPath, getRoadMap, removeNode} from "../../service/Service";
 import Drawer from "../drawer/Drawer";
 
 const d = false;
@@ -30,7 +30,7 @@ export default function Roadmap() {
   const [remX, setRemX] = useState(0);
   const [remY, setRemY] = useState(0);
 
-  const [mode, setMode] = useState(null); // path, add
+  const [mode, setMode] = useState(null); // path, add, fix
   const [isPathing, setIsPathing] = useState(false);
 
   const [hoveredNode, setHoveredNode] = useState(null);
@@ -58,17 +58,36 @@ export default function Roadmap() {
   const [clickedNodeType, setClickedNodeType] = useState(null);
   const [isDrawer, setIsDrawer] = useState(false);
 
+  const [nodeBoards, setNodeBoards] = useState([]);
+
+  function nodeBoard(id) {
+    getNodeBoard(id)
+      .then((i) => {
+        setNodeBoards(i);
+      })
+      .catch(e => {
+        setNodeBoards([]);
+      });
+  }
+
+  useEffect(() => {
+    if (!clickedNode) {
+      return;
+    }
+    nodeBoard(clickedNode.id);
+
+  }, [clickedNode]);
+
   function handleClickNode(node, nodeType) {
     setIsDrawer(true);
     if (d) {
       setClickedPos({
         xPos: node.xPos,
         yPos: node.yPos
-      })
+      });
       setClickedNodeType(nodeType);
-      setClickedNode(node);
-      console.log(node);
     }
+    setClickedNode(node);
   }
 
   function getNodeById(id) {
@@ -217,7 +236,7 @@ export default function Roadmap() {
   const [key, setkey] = useState('');
   const [keyL, setkeyL] = useState(0);
   useEffect(() => {
-    if (mode === null) {
+    if (mode === 'fix') {
       if (key === 'x' && clickedNode) {
         removeNode(clickedNode.id)
           .then(() => {
@@ -245,7 +264,7 @@ export default function Roadmap() {
     if (key === 'e') {
       clearPathState();
       clearAddState();
-      setMode(null);
+      setMode('fix');
     }
     if (key === 's') {
       setIsRePath(i => !i);
@@ -357,7 +376,7 @@ export default function Roadmap() {
   }, [category]);
   return (
     <RoadmapContainer>
-      {!d ? <Drawer isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
+      {!d ? <Drawer nodeBoards={nodeBoards} isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
       </Drawer> : null}
 
       <CategorySelectorContainer>
@@ -421,7 +440,7 @@ export default function Roadmap() {
         };
       })() : null}
       <NodeContainer>
-        {(clickedPos.xPos && clickedPos.yPos) || (mode === null && clickedNode) ? (
+        {(clickedPos.xPos && clickedPos.yPos) || (mode === 'fix' && clickedNode) ? (
           <FormContainer style={{
             // left: clickedPos.xPos + 12 + 'rem',
             // top: clickedPos.yPos + 5 + 'rem'
@@ -432,7 +451,7 @@ export default function Roadmap() {
           <button style={{
             zIndex: 200
           }} onClick={() => {
-            if (mode === null) {
+            if (mode === 'fix') {
               setClickedNode((e) => ({
                 xPos: null,
                 yPos: null,

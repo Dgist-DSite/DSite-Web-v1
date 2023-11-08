@@ -5,6 +5,7 @@ export const DrawerContainer = styled.div`
   width: 35rem;
   height: 100vh;
   right: 0;
+  overflow: scroll;
   z-index: 2;
   flex-direction: column;
   background-color: white;
