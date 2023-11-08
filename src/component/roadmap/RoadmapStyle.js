@@ -9,6 +9,8 @@ export const RoadmapContainer = styled.div`
 
   min-width: 120rem;
   min-height: 150rem;
+  
+  overflow: scroll;
 
   @media screen and (max-width: 58rem) {
     margin-left: 7rem;
@@ -17,7 +19,6 @@ export const RoadmapContainer = styled.div`
   @media screen and (max-width: 44rem) {
     margin-left: 0;
   }
-
 `
 
 export const NodeParent = styled.button`
