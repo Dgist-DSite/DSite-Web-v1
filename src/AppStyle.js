@@ -19,9 +19,20 @@ export const NavContainer = styled.div`
   justify-content: space-between;
 `
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled(Link)`
   margin-left: 30px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+`
+
+export const ImageContainer = styled.img`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100px;
+  margin-right: 12px;
 `
 
 export const LeftNav = styled.div`

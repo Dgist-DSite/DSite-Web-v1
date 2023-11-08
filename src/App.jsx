@@ -1,5 +1,5 @@
 import {
-  AppContainer, BottomContainer, Container,
+  AppContainer, BottomContainer, Container, ImageContainer,
   LeftNav, LinkContainer,
   NavContainer, RailContainer,
   TitleContainer, TopContainer
@@ -13,14 +13,17 @@ import ReactMarkdown from 'react-markdown';
 import Policy from "./component/policy/Policy";
 import {Divider} from "./component/rail/RailStyle";
 import Roadmap from "./component/roadmap/Roadmap";
-
+import Logo from './logo.png'
 
 function App() {
   return (
     <AppContainer>
       <NavContainer>
         <LeftNav>
-          <TitleContainer>
+          <TitleContainer to={`/`}>
+            <ImageContainer src={Logo}>
+
+            </ImageContainer>
             <Title>DSite</Title>
           </TitleContainer>
         </LeftNav>
