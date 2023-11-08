@@ -71,7 +71,8 @@ export const CategorySelectorContainer = styled.div`
   right: 0;
   top: 0;
   left: 0;
-  z-index: 10000;
+  pointer-events: none;
+  z-index: 100;
 `
 
 export const Select = styled.select`
@@ -80,6 +81,7 @@ export const Select = styled.select`
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
+  pointer-events: auto;
 `
 
 export const PathSelector = styled(NodeParent)`
