@@ -7,7 +7,7 @@ export const RailContainer = styled.div`
   cursor: pointer;
   background-color: white;
   height: 4rem;
-  margin-left: 1rem;
+  padding-left: 1rem;
 
   @media screen and (max-width: 58rem) {
     align-items: center;
