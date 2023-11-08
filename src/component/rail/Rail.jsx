@@ -4,12 +4,14 @@ import {Body, Title} from "../common/TextStyle";
 export default function Rail({ text }) {
   return (
     <RailContainer>
-      <Title style={{
-        color: '#555',
-        fontWeight: 'normal'
-      }}>
-        {text}
-      </Title>
+      <TextContainer>
+        <Title style={{
+          color: '#555',
+          fontWeight: 'normal',
+        }}>
+          {text}
+        </Title>
+      </TextContainer>
       <Divider/>
     </RailContainer>
   )

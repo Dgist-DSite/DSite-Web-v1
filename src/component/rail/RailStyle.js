@@ -6,14 +6,14 @@ export const RailContainer = styled.div`
   flex-direction: column;
   cursor: pointer;
   background-color: white;
+  height: 4rem;
+  margin-left: 1rem;
 
   @media screen and (max-width: 58rem) {
     align-items: center;
     align-content: center;
     justify-content: center;
-  }
-  @media screen and (max-width: 44rem) {
-    height: 100%;
+    margin-left: 0;
   }
   
   transition: background-color 0.2s;
@@ -28,7 +28,10 @@ export const RailContainer = styled.div`
 `
 
 export const TextContainer = styled.div`
-  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 export const Divider = styled.div`
