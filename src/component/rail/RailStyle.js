@@ -5,6 +5,7 @@ export const RailContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   cursor: pointer;
+  height: 100%;
   background-color: white;
 
   @media screen and (max-width: 58rem) {
@@ -31,4 +32,7 @@ export const Divider = styled.div`
   height: 1px;
   background: #f1f1f1;
   margin: 0 auto;
+  @media screen and (max-width: 44rem) {
+    display: none;
+  }
 `
