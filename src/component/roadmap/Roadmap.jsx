@@ -56,7 +56,7 @@ export default function Roadmap() {
 
   const [clickedNode, setClickedNode] = useState(null);
   const [clickedNodeType, setClickedNodeType] = useState(null);
-  const [isDrawer, setIsDrawer] = useState(true);
+  const [isDrawer, setIsDrawer] = useState(false);
 
   function handleClickNode(node, nodeType) {
     setIsDrawer(true);
