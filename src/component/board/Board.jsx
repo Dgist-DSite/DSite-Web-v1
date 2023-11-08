@@ -6,11 +6,13 @@ import {
   BoardThumbnale,
   BoardUserContainer, BodyContainer, DetailBodyContainer, DetailLabelContainer, DetailTitleContainer, TitleContainer
 } from "./BoardStyle";
-import React from "react";
+import React, {useState} from "react";
 import {Body, Label, Title} from "../common/TextStyle";
+import errorImage from './dummy.png';
 
 export default function Board({ model, callback }) {
-  let url = new URL(model.url)
+  let url = new URL(model.url);
+  const [imageSrc, setImageSrc] = useState(model.image);
 
   return (
     <BoardContainer onClick={() => callback()}>
@@ -23,7 +25,10 @@ export default function Board({ model, callback }) {
           </BoardInfoContainer>
         </BoardUserContainer>
         <BoardContentContainer href={model.url} target="_blank">
-          <BoardThumbnale src={model.image}/>
+          <BoardThumbnale onError={(e) => {
+            console.log(model.title);
+            setImageSrc(errorImage);
+          }} src={imageSrc}/>
           <BoardDetail>
             <DetailTitleContainer>
               <Title>{model.title}</Title>

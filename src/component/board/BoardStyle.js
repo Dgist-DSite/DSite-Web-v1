@@ -56,6 +56,7 @@ export const BoardContentContainer = styled.a`
 
 export const BoardThumbnale = styled.img`
   width: 100%;
+  min-height: 4rem;
   border-radius: 10px;
 `
 
