@@ -13,7 +13,7 @@ import {useEffect, useRef, useState} from "react";
 import {addNode, addPath, fixNode, getPath, getRoadMap, removeNode} from "../../service/Service";
 import Drawer from "../drawer/Drawer";
 
-const d = false;
+const d = true;
 
 export default function Roadmap() {
   const [category, setCategory] = useState(Constant.roadmapList[0]);
