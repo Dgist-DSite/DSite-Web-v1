@@ -5,11 +5,13 @@ export const RailContainer = styled.div`
   align-items: flex-start;
   flex-direction: column;
   cursor: pointer;
-  height: 100%;
   background-color: white;
 
   @media screen and (max-width: 58rem) {
     align-items: center;
+  }
+  @media screen and (max-width: 44rem) {
+    height: 100%;
   }
   
   transition: background-color 0.2s;
