@@ -99,8 +99,7 @@ export default function Home() {
             handlePostModalClose()
           }
           }/>}>
-          <DefaultButton style={{
-          }} onClick={() => setPostModalOpen(true)}>
+          <DefaultButton style={{}} onClick={() => setPostModalOpen(true)}>
             <Title>블로그 공유</Title>
           </DefaultButton>
         </Modal>
@@ -127,7 +126,7 @@ export default function Home() {
         {/*<DisplayAds/>*/}
         {/*<DisplayAds/>*/}
         {list.map((i) =>
-          <ul>
+          <ul key={i.id}>
             {<Board callback={() => handleClickBoard(i)} model={i}/>}
           </ul>
         )}
@@ -135,5 +134,5 @@ export default function Home() {
 
 
     </MainContainer>
-  )
+  );
 }

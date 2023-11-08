@@ -6,7 +6,7 @@ import {
   BoardThumbnale,
   BoardUserContainer, BodyContainer, DetailBodyContainer, DetailLabelContainer, DetailTitleContainer, TitleContainer
 } from "./BoardStyle";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Body, Label, Title} from "../common/TextStyle";
 import errorImage from './dummy.png';
 
