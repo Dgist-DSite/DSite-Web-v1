@@ -62,8 +62,8 @@ export const LinkContainer = styled(Link)`
 `
 
 export const TopContainer = styled.div`
-  min-width: 400px;
   @media screen and (max-width: 44rem) {
+    min-width: 400px;
     width: 100%;
     display: flex;
     flex-direction: row;
