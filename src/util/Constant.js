@@ -200,6 +200,9 @@ export const pathList = [
 export function generateTopRailPath(e) {
   let result;
   switch (e) {
+    case '홈':
+      result = ''
+      break;
     case '로드맵':
       result = 'roadmap'
       break;
