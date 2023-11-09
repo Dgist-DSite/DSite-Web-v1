@@ -10,7 +10,7 @@ export const PostContainer = styled.div`
     width: 100vw;
     padding: 0 10px;
   }
-  z-index: 99;
+  z-index: 101;
 `
 
 export const ButtonContainer = styled.div`

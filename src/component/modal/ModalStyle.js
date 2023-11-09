@@ -5,7 +5,8 @@ export const ModalContainer = styled.div`
   justify-content : center;
   align-items : center;
   height : 100%;
-  z-index: 100;
+  z-index: 1000;
+  position: relative;
 `;
 
 export const ModalBackdrop = styled.div`

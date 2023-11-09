@@ -9,7 +9,6 @@ export const DefaultButton = styled.a`
   color: white;
 
   transition: background-color 0.2s;
-
   &:hover {
     background-color: ${props => props.color ? props.color : '#c46e0a'};
   }
