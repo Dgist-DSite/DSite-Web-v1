@@ -7,7 +7,7 @@ export const RailContainer = styled.div`
   cursor: pointer;
   background-color: white;
   height: 4rem;
-  padding-left: 1rem;
+  //padding-left: 1rem;
 
   @media screen and (max-width: 58rem) {
     align-items: center;
@@ -30,6 +30,7 @@ export const RailContainer = styled.div`
 export const TextContainer = styled.div`
   height: 100%;
   display: flex;
+  margin-left: 1rem;
   flex-direction: column;
   justify-content: center;
 `

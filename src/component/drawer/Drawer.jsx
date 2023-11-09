@@ -25,7 +25,7 @@ export default function Drawer({category, clickedNode, nodeBoards, isDrawer, set
       <ButtonContainer>
         <TransparentButton
           onClick={() => {
-            setIsDrawer(i => !i)
+            setIsDrawer(i => !i);
           }}
           style={{
             fontSize: '18px',
