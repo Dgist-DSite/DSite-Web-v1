@@ -7,7 +7,7 @@ export const DefaultButton = styled.a`
   cursor: pointer;
   background-color: ${props => props.color ? props.color : '#f68809'};
   color: white;
-  
+
   transition: background-color 0.2s;
 
   &:hover {
@@ -17,7 +17,7 @@ export const DefaultButton = styled.a`
   &:active {
     background-color: ${props => props.color ? props.color : '#985202'};
   }
-`
+`;
 
 export const SelectButtonStyle = styled.button`
   border: none;

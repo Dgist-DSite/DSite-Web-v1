@@ -21,3 +21,28 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-content: flex-start;
 `
+
+export const InputContainer = styled.div`
+  padding: 1rem;
+`
+
+export const SubmitContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
+
+export const NodeBoardContainer = styled.li`
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1rem 0 0 1rem;
+`

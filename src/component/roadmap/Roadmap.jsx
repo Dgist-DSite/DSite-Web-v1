@@ -10,7 +10,16 @@ import {Body} from "../common/TextStyle";
 import {Constant} from "../../util/Constant";
 import {Option} from "../post/PostStyle";
 import {useEffect, useRef, useState} from "react";
-import {addNode, addPath, fixNode, getNodeBoard, getPath, getRoadMap, removeNode} from "../../service/Service";
+import {
+  addNode,
+  addNodeBoard,
+  addPath,
+  fixNode,
+  getNodeBoard,
+  getPath,
+  getRoadMap,
+  removeNode
+} from "../../service/Service";
 import Drawer from "../drawer/Drawer";
 
 const d = false;
@@ -370,13 +379,33 @@ export default function Roadmap() {
       });
   }
 
-  useEffect(() => {
+  function changeCategory() {
     node();
     path();
+    setIsDrawer(false);
+    setClickedNode(null);
+  }
+
+  useEffect(() => {
+    changeCategory();
   }, [category]);
   return (
     <RoadmapContainer>
-      {!d ? <Drawer nodeBoards={nodeBoards} isDrawer={isDrawer} setIsDrawer={setIsDrawer}>
+      {!d ? <Drawer
+        category={category}
+        clickedNode={clickedNode}
+        nodeBoards={nodeBoards}
+        isDrawer={isDrawer}
+        setIsDrawer={setIsDrawer}
+        addNodeCallback={(url) => {
+          addNodeBoard(clickedNode.id, url)
+            .then(e => {
+
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }}>
       </Drawer> : null}
 
       <CategorySelectorContainer>
@@ -437,7 +466,8 @@ export default function Roadmap() {
               {'new child node'}
             </NewChildNode>
           );
-        };
+        }
+        ;
       })() : null}
       <NodeContainer>
         {(clickedPos.xPos && clickedPos.yPos) || (mode === 'fix' && clickedNode) ? (
@@ -445,35 +475,35 @@ export default function Roadmap() {
             // left: clickedPos.xPos + 12 + 'rem',
             // top: clickedPos.yPos + 5 + 'rem'
           }}>
-          <Input style={{
-            zIndex: 300
-          }} value={nodeText} onChange={(e) => setNodeText(e.target.value)}/>
-          <button style={{
-            zIndex: 200
-          }} onClick={() => {
-            if (mode === 'fix') {
-              setClickedNode((e) => ({
+            <Input style={{
+              zIndex: 300
+            }} value={nodeText} onChange={(e) => setNodeText(e.target.value)}/>
+            <button style={{
+              zIndex: 200
+            }} onClick={() => {
+              if (mode === 'fix') {
+                setClickedNode((e) => ({
+                  xPos: null,
+                  yPos: null,
+                }));
+                setClickedNode(null);
+                editNode(nodeText, clickedNode);
+              } else {
+                createNode(nodeText, isSuperNode, clickedPos);
+              }
+            }}>
+              생성
+            </button>
+            <button onClick={() => {
+              setClickedPos((e) => ({
                 xPos: null,
-                yPos: null,
+                yPos: null
               }));
               setClickedNode(null);
-              editNode(nodeText, clickedNode);
-            } else {
-              createNode(nodeText, isSuperNode, clickedPos);
-            }
-          }}>
-            생성
-          </button>
-          <button onClick={() => {
-            setClickedPos((e) => ({
-              xPos: null,
-              yPos: null
-            }));
-            setClickedNode(null);
-          }}>
-            취소
-          </button>
-        </FormContainer>) : null}
+            }}>
+              취소
+            </button>
+          </FormContainer>) : null}
 
         {superNodeList.map((node) => (
           <SuperNode
