@@ -8,7 +8,7 @@ import Post from "../post/Post";
 import {useEffect, useState} from "react";
 import {getBoards, getBoardsByCategory} from "../../service/Service";
 import {getTimeAgo} from "../../util/Time";
-import {ButtonContainer, MainContainer, SettingContainer} from "./HomeStyle";
+import {BoardContainer, ButtonContainer, MainContainer, SettingContainer} from "./HomeStyle";
 
 
 const dummyList = [
@@ -113,19 +113,16 @@ export default function Home() {
       <SettingContainer>
         {["전체", ...Constant.categoryList].map((i) => (
           <SelectButtonStyle onClick={() => handleCategory(i)}>
-            {selectedCategory === i
-              ? <Body style={{fontWeight: 'bold', color: '#f68809'}}>{i}</Body>
-              : <Body>{i}</Body>}
+            {<Body
+              style={{
+                fontWeight: selectedCategory === i ? 'bold' : 'normal',
+                color: selectedCategory === i ? '#f68809' : 'black',
+                fontSize: '16px'
+              }}>{i}</Body>}
           </SelectButtonStyle>
         ))}
       </SettingContainer>
 
-      <Modal isOpen={boardModalOpen} setIsOpen={handleBoardModalClose} content={
-        <Detail model={clickedBoard} close={() => {
-          handleBoardModalClose();
-        }
-        }/>}>
-      </Modal>
       <li>
         {/*<DisplayAds/>*/}
         {/*<DisplayAds/>*/}
@@ -133,12 +130,20 @@ export default function Home() {
         {/*<DisplayAds/>*/}
         {list.map((i) =>
           <ul key={i.id}>
-            {<Board callback={() => handleClickBoard(i)} model={i}/>}
+            <BoardContainer>
+              {<Board callback={() => handleClickBoard(i)} model={i}/>}
+            </BoardContainer>
+
           </ul>
         )}
       </li>
 
-
+      <Modal isOpen={boardModalOpen} setIsOpen={handleBoardModalClose} content={
+        <Detail model={clickedBoard} close={() => {
+          handleBoardModalClose();
+        }
+        }/>}>
+      </Modal>
     </MainContainer>
   );
 }

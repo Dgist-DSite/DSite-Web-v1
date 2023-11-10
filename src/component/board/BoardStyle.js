@@ -8,7 +8,6 @@ export const BoardContainer = styled.button`
   background: #fff;
   border-radius: 10px;
   border: 1.5px solid #D0D7DE;
-  margin: 1rem 0;
   cursor: pointer;
 `;
 

@@ -28,7 +28,6 @@ export const ButtonContainer = styled.div`
 
 export const SettingContainer = styled.div`
   display: flex;
-  padding-top: 1rem;
   width: 100%;
   align-content: center;
   margin: 0 auto;
@@ -39,4 +38,8 @@ export const SettingContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`
+
+export const BoardContainer = styled.div`
+  margin-bottom: 1rem;
 `
