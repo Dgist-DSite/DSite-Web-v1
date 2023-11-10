@@ -42,12 +42,12 @@ export default function Home() {
 
   function handlePostModalClose() {
     setPostModalOpen(false);
-    getAllBoard();
+    handleCategory(selectedCategory);
   }
 
   function handleBoardModalClose() {
     setBoardModalOpen(false)
-    getAllBoard();
+    handleCategory(selectedCategory);
   }
 
   function handleClickBoard(board) {
@@ -90,16 +90,22 @@ export default function Home() {
     setList(boards);
   }
 
-  return (
+  const [isPostLoading, setIsPostLoading] = useState(false);
 
+  return (
     <MainContainer>
       <ButtonContainer>
         <Modal isOpen={postModalOpen} setIsOpen={handlePostModalClose} content={
-          <Post close={() => {
-            handlePostModalClose()
+          <Post isLoading={isPostLoading} setIsLoading={(i) => {
+            setIsPostLoading(i);
+          }} close={() => {
+            handlePostModalClose();
           }
           }/>}>
-          <DefaultButton style={{}} onClick={() => setPostModalOpen(true)}>
+          <DefaultButton
+            disabled={isPostLoading}
+            color={isPostLoading ? '#fdc98d' : '#f68809'}
+            onClick={() => setPostModalOpen(true)}>
             <Title>블로그 공유</Title>
           </DefaultButton>
         </Modal>

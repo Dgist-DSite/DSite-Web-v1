@@ -9,12 +9,11 @@ import {isValidUrl} from "../../util/Url";
 import 'react-toastify/dist/ReactToastify.css';
 import {Constant} from "../../util/Constant";
 
-export default function Post({ close }) {
+export default function Post({ isLoading, setIsLoading, close }) {
   const warnNotify = (msg) => toast.warning(msg);
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
   const [category, setCategory] = useState("");
-  const [isPosted, setIsPosted] = useState(false);
 
   function onChange(e, func) {
     func(e.target.value);
@@ -28,22 +27,21 @@ export default function Post({ close }) {
       warnNotify('내용을 적어주세요');
       return;
     }
-    if (isPosted) {
+    if (isLoading) {
       warnNotify('잠시만 기다려주세요..');
       return;
     }
-    setIsPosted(true);
+    setIsLoading(true);
     uploadBoard(content, category, url)
       .then((i) => {
-        const data = i.data
         setTimeout(() => {
-          setIsPosted(false);
+          setIsLoading(false);
         }, 5000);
-        close()
+        close();
       })
     .catch((e) => {
       setTimeout(() => {
-        setIsPosted(false);
+        setIsLoading(false);
       }, 5000);
       warnNotify('유효한 url을 적어주세요');
     })
