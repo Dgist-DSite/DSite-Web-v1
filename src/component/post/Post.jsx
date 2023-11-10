@@ -36,13 +36,13 @@ export default function Post({ isLoading, setIsLoading, close }) {
       .then((i) => {
         setTimeout(() => {
           setIsLoading(false);
-        }, 5000);
+        }, 1000);
         close();
       })
     .catch((e) => {
       setTimeout(() => {
         setIsLoading(false);
-      }, 5000);
+      }, 1000);
       warnNotify('유효한 url을 적어주세요');
     })
   }
@@ -74,9 +74,13 @@ export default function Post({ isLoading, setIsLoading, close }) {
         <DefaultInput placeholder={'간단한 설명을 적어주세요'} value={content} onChange={(e) => onChange(e, setContent)}/>
       </InputContainer>
 
-
-
-      <DefaultButton onClick={() => submit()}>
+      <DefaultButton
+        style={{
+          cursor: isLoading ? 'not-allowed' : 'pointer'
+        }}
+        disabled={isLoading}
+        color={isLoading ? '#fdc98d' : '#f68809'}
+        onClick={() => submit()}>
         <Body>업로드</Body>
       </DefaultButton>
       <ToastContainer/>
