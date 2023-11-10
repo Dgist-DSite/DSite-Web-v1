@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import {getBoards, getBoardsByCategory} from "../../service/Service";
 import {getTimeAgo} from "../../util/Time";
 import {BoardContainer, ButtonContainer, MainContainer, SettingContainer} from "./HomeStyle";
+import DisplayAds from "../adsense/DisplayAds";
 
 
 const dummyList = [
@@ -127,7 +128,7 @@ export default function Home() {
         {/*<DisplayAds/>*/}
         {/*<DisplayAds/>*/}
         {/*<DisplayAds/>*/}
-        {/*<DisplayAds/>*/}
+        <DisplayAds/>
         {list.map((i) =>
           <ul key={i.id}>
             <BoardContainer>
