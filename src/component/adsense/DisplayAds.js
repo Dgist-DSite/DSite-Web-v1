@@ -4,34 +4,34 @@ export default function DisplayAds () {
   useEffect(() => {
     const pushAd = () => {
       try {
-        const adsbygoogle = window.adsbygoogle
-        // console.log({ adsbygoogle })
-        adsbygoogle.push({})
+        window.adsbygoogle.push({})
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     }
 
     let interval = setInterval(() => {
-      // Check if Adsense script is loaded every 300ms
+      console.log(window.adsbygoogle);
       if (window.adsbygoogle) {
-        pushAd()
-        // clear the interval once the ad is pushed so that function isn't called indefinitely
-        clearInterval(interval)
+        console.log(window.adsbygoogle);
+        pushAd();
       }
-    }, 300)
+    }, 300);
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval);
     }
-  }, [])
+  }, []);
   return (
+    <>
   <ins className="adsbygoogle"
        style={{display:'block'}}
        data-ad-client="ca-pub-5311725069729372"
        data-ad-slot="9709674992"
        data-ad-format="auto"
        data-full-width-responsive="true"></ins>
+    </>
+
   )
 }
 
